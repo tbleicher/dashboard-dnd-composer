@@ -1,33 +1,26 @@
 import React from "react";
-import { Box, Icon, Stack } from "@chakra-ui/core";
+import { Stack } from "@chakra-ui/core";
+import Tool from "./Tool";
+import types from "./toolTypes";
 
-const Tool = ({ icon }) => {
-  return (
-    <Box
-      borderColor="brand.200"
-      borderWidth="1px"
-      rounded="lg"
-      bg="brand.200"
-      p={2}
-      mb={2}
-    >
-      <Icon name={icon} size={8} />
-    </Box>
-  );
-};
+const tools = [
+  { icon: "row", type: types.ADD_ROW },
+  { icon: "column", type: types.ADD_COLUMN },
+  { icon: "arrowExpandHorizontal", type: types.ADD_SPACER_H },
+  { icon: "arrowExpandVertical", type: types.ADD_SPACER_V },
+  { icon: "frame", type: types.ADD_FRAME },
+  { icon: "textbox", type: types.ADD_TEXT },
+  { icon: "chart", type: types.ADD_CHART },
+  { icon: "table", type: types.ADD_TABLE },
+  { icon: "image", type: types.ADD_IMAGE },
+];
 
-const Toolbar = () => {
+const Toolbar = (props) => {
   return (
     <Stack m={2}>
-      <Tool icon="row" />
-      <Tool icon="column" />
-      <Tool icon="arrowExpandHorizontal" />
-      <Tool icon="arrowExpandVertical" />
-      <Tool icon="frame" />
-      <Tool icon="textbox" />
-      <Tool icon="chart" />
-      <Tool icon="table" />
-      <Tool icon="image" />
+      {tools.map((tool) => (
+        <Tool key={tool.type} {...tool} {...props} />
+      ))}
     </Stack>
   );
 };
