@@ -13,14 +13,14 @@ const RowSizer = (props) => {
         flexShrink: 0,
       }}
     >
-      <div style={{ border: "1px solid blue", width: "100%", height: "100%" }}>
+      <div style={{ border: "1px solid green", width: "100%", height: "100%" }}>
         <div
           style={{
-            boxSizing: "border-box",
-            backgroundColor: "skyblue",
+            // backgroundColor: "yellow",
             width: "100%",
             height: "100%",
-            opacity: 0.5,
+
+            opacity: 0.2,
           }}
         />
       </div>

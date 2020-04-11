@@ -15,7 +15,7 @@ const DropTarget = ({ height, index, parent }) => {
   });
 
   const style = {
-    backgroundColor: "yellow",
+    // backgroundColor: "yellow",
     opacity: 0.2,
     height,
     width: "100%",

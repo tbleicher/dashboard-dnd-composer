@@ -6,10 +6,11 @@ import { Flex } from "@chakra-ui/core";
 import Canvas from "./Canvas";
 import Toolbar from "./Toolbar";
 import layoutReducer from "./layoutReducer";
+import frameTypes from "./frameTypes";
 
 const initialLayout = [
-  { id: shortid.generate(), height: 80 },
-  { id: shortid.generate(), height: 160 },
+  { id: shortid.generate(), height: 80, children: [], type: frameTypes.ROW },
+  { id: shortid.generate(), height: 160, children: [], type: frameTypes.ROW },
 ];
 
 const Composer = () => {
@@ -18,7 +19,7 @@ const Composer = () => {
   return (
     <DndProvider backend={Backend}>
       <Flex>
-        <Canvas layout={layout} id={shortid.generate()} />
+        <Canvas layout={layout} id="DASHBOARD-LAYOUT-ID" />
         <Toolbar dispatch={dispatch} />
       </Flex>
     </DndProvider>

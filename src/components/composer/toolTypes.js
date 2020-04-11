@@ -2,7 +2,6 @@
 // and the reducer action after a drop
 
 export default {
-  ADD_BOX: "ADD_BOX",
   ADD_CHART: "ADD_CHART",
   ADD_COLUMN: "ADD_COLUMN",
   ADD_FRAME: "ADD_FRAME",
