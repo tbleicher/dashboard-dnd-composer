@@ -20,7 +20,11 @@ const DropTarget = ({ accept, index, parent, ...displayProps }) => {
     flexShrink: 0,
   };
 
-  if (canDrop && isOver) {
+  if (!canDrop) {
+    // TODO: highlight background of first row even if dragging is not in progress
+    // to invite user to interact with canvas and add a frame or a second row
+    style.backgroundColor = "";
+  } else if (canDrop && isOver) {
     style.backgroundColor = hoverColor;
     style.opacity = hoverOpacity;
   } else if (canDrop) {

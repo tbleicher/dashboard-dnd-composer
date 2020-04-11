@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 import frameTypes from "./frameTypes";
-import framesMap from "./frames";
+import ColumnSizer from "./ColumnSizer";
+import RowSizer from "./RowSizer";
 
 const Background = styled.div`
   display: flex;
@@ -13,11 +14,25 @@ const Background = styled.div`
     linear-gradient(to bottom, lightgrey 1px, transparent 1px);
 `;
 
+const framesMap = {};
+framesMap[frameTypes.COLUMN] = ColumnSizer;
+framesMap[frameTypes.ROW] = RowSizer;
+
 const getHeight = (layout) => {
-  if (layout.type === frameTypes.COLUMN) {
-    return layout.children
-      .map((row) => row.height)
-      .reduce((sum, h) => sum + h, 0);
+  const { children, type } = layout;
+
+  if (!children) {
+    return layout.height || 80;
+  }
+
+  if (type === frameTypes.COLUMN) {
+    return children.length
+      ? children.map(getHeight).reduce((sum, h) => sum + h, 0)
+      : 80;
+  }
+
+  if (type === frameTypes.ROW) {
+    return Math.max(...children.map(getHeight), 0) || 80;
   }
 };
 

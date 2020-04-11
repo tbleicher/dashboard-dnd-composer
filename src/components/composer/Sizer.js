@@ -1,12 +1,11 @@
 import React from "react";
 import DropTarget from "./DropTarget";
-import toolTypes from "./toolTypes";
 
 const Sizer = ({ framesMap, layout, frameDimensions }) => {
-  const { id: parent, children } = layout;
+  const { accept, children, id: parent } = layout;
 
   const dropTargetProps = {
-    accept: [toolTypes.ADD_ROW],
+    accept,
     parent,
   };
 

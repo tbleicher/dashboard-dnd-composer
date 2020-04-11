@@ -1,5 +1,6 @@
 import shortid from "shortid";
 import frameTypes from "./frameTypes";
+import toolTypes from "./toolTypes";
 
 const withLogging = (reducer) => (state, action) => {
   const newState = reducer(state, action);
@@ -11,18 +12,44 @@ const withLogging = (reducer) => (state, action) => {
   return newState;
 };
 
+export const newElement = (type) => {
+  const element = {
+    id: shortid.generate(),
+    type,
+  };
+
+  if (type === frameTypes.COLUMN) {
+    return {
+      ...element,
+      children: [],
+      accept: [toolTypes.ADD_ROW],
+    };
+  }
+
+  if (type === frameTypes.ROW) {
+    return {
+      ...element,
+      children: [],
+      accept: [toolTypes.ADD_COLUMN],
+    };
+  }
+
+  return { ...element, width: 80, height: 80 };
+};
+
 const addElement = (type) => (state, action) => {
   // TODO: use action.parent and allow for nesting
   if (state.id === action.parent) {
     const children = [
       ...state.children.slice(0, action.index),
-      // TODO: use template or generator
-      { id: shortid.generate(), height: 80, children: [], type },
+      newElement(type),
       ...state.children.slice(action.index),
     ];
 
     return { ...state, children };
   }
+
+  return state;
 };
 
 const addRow = addElement(frameTypes.ROW);

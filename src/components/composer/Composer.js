@@ -1,19 +1,17 @@
 import React from "react";
 import Backend from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
-import shortid from "shortid";
 import { Flex } from "@chakra-ui/core";
 import Canvas from "./Canvas";
 import Toolbar from "./Toolbar";
-import layoutReducer from "./layoutReducer";
+import layoutReducer, { newElement } from "./layoutReducer";
 import frameTypes from "./frameTypes";
+import toolTypes from "./toolTypes";
 
 const initialLayout = {
   id: "DASHBOARD-LAYOUT-ID",
-  children: [
-    { id: shortid.generate(), height: 80, children: [], type: frameTypes.ROW },
-    { id: shortid.generate(), height: 160, children: [], type: frameTypes.ROW },
-  ],
+  accept: [toolTypes.ADD_ROW],
+  children: [newElement(frameTypes.ROW), newElement(frameTypes.ROW)],
   type: frameTypes.COLUMN,
 };
 

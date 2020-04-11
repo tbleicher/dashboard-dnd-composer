@@ -36,7 +36,6 @@ const RowSizer = (props) => {
     }),
   };
 
-  console.log("RowSizer.render()");
   return <Sizer {...sizerProps} frameDimensions={frameDimensions} />;
 };
 
