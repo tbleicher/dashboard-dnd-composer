@@ -1,5 +1,6 @@
 import React from "react";
 import Sizer from "./Sizer";
+import { GRID_COLUMN_WIDTH } from "../constants";
 
 const getWidth = (layout) => {
   const { children, width } = layout;
@@ -10,7 +11,7 @@ const getWidth = (layout) => {
 
   if (layout.type === "ROW" && children.length === 0) return "100%";
 
-  return width || 80;
+  return width || GRID_COLUMN_WIDTH;
 };
 
 const ColumnSizer = (props) => {
@@ -29,12 +30,15 @@ const ColumnSizer = (props) => {
     // height for final target
     getFinalTargetSize: (frames) => ({
       flexGrow: 1,
-      height: 80 + targetHeight / 2,
+      height: GRID_COLUMN_WIDTH + targetHeight / 2,
     }),
   };
 
   return (
-    <div id="column" style={{ outline: "1px solid green", width: "100%" }}>
+    <div
+      data-type="ColumnSizer"
+      style={{ outline: "1px solid green", width: "100%" }}
+    >
       <Sizer {...sizerProps} frameDimensions={frameDimensions} />
     </div>
   );

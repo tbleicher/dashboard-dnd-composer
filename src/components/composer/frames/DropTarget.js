@@ -31,7 +31,7 @@ const DropTarget = ({ accept, index, parent, ...displayProps }) => {
     style.backgroundColor = targetColor;
   }
 
-  return <div ref={drop} style={style} />;
+  return <div data-type="DropTarget" ref={drop} style={style} />;
 };
 
 DropTarget.defaultProps = {

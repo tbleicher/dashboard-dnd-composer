@@ -1,6 +1,7 @@
 import shortid from "shortid";
 import { frameTypes } from "./frames";
 import { toolTypes } from "./tools";
+import { GRID_ROW_HEIGHT, GRID_COLUMN_WIDTH } from "./constants";
 
 const withLogging = (reducer) => (state, action) => {
   const newState = reducer(state, action);
@@ -11,10 +12,11 @@ const withLogging = (reducer) => (state, action) => {
   return newState;
 };
 
-export const newElement = (type) => {
+export const newElement = (type, options = {}) => {
   const element = {
     id: shortid.generate(),
     type,
+    ...options,
   };
 
   if (type === frameTypes.COLUMN) {
@@ -33,7 +35,12 @@ export const newElement = (type) => {
     };
   }
 
-  return { ...element, width: 80, height: 80 };
+  return {
+    ...element,
+    width: GRID_COLUMN_WIDTH,
+    height: GRID_ROW_HEIGHT,
+    ...options,
+  };
 };
 
 const includesParent = (children, parent) => {
@@ -65,6 +72,7 @@ const addElement = (type) => (state, action) => {
   return state;
 };
 
+const addColumn = addElement(frameTypes.COLUMN);
 const addRow = addElement(frameTypes.ROW);
 const addFrame = addElement(frameTypes.FRAME);
 
@@ -73,6 +81,8 @@ const addFrame = addElement(frameTypes.FRAME);
 const layoutReducer = (state, action) => {
   console.clear();
   switch (action.type) {
+    case "ADD_COLUMN":
+      return withLogging(addColumn)(state, action);
     case "ADD_FRAME":
       return withLogging(addFrame)(state, action);
     case "ADD_ROW":

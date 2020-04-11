@@ -1,12 +1,23 @@
 import React from "react";
-import { Box, Icon } from "@chakra-ui/core";
+import { Flex, Icon } from "@chakra-ui/core";
+import { GRID_COLUMN_WIDTH, GRID_ROW_HEIGHT } from "../constants";
 
-const Frame = ({ width = 80, height = 80 }) => {
-  console.log("Frame", width, height);
+const Frame = ({
+  layout,
+  width = GRID_COLUMN_WIDTH,
+  height = GRID_ROW_HEIGHT,
+}) => {
+  console.log("F", layout.id, width, height);
   return (
-    <Box width={width} height={height} bg="brand.100">
-      <Icon name="frame" size={12} fill="brand.300" m="6px" />
-    </Box>
+    <Flex
+      bg="brand.100"
+      align="center"
+      justify="center"
+      width={`${width}px`}
+      height={`${height}px`}
+    >
+      <Icon name="frame" size={12} fill="brand.300" />
+    </Flex>
   );
 };
 

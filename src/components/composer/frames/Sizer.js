@@ -24,6 +24,7 @@ const Sizer = ({ framesMap, layout, frameDimensions }) => {
 
     // render children by their type
     const Component = framesMap[row.type];
+    console.log("getFrameSize", row.id, getFrameSize(row, index));
     agg.push(
       <Component
         framesMap={framesMap}
