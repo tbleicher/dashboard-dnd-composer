@@ -27,10 +27,18 @@ const ColumnSizer = (props) => {
       height: frame.height - targetHeight,
     }),
     // height for final target
-    getFinalTargetSize: () => ({ flexGrow: 1, height: 80 + targetHeight / 2 }),
+    getFinalTargetSize: (frames) => ({
+      flexGrow: 1,
+      height: 80 + targetHeight / 2,
+    }),
   };
 
-  return <Sizer {...sizerProps} frameDimensions={frameDimensions} />;
+  return (
+    <div id="column" style={{ outline: "1px solid green", width: "100%" }}>
+      <Sizer {...sizerProps} frameDimensions={frameDimensions} />
+    </div>
+  );
+  // return <Sizer {...sizerProps} frameDimensions={frameDimensions} />;
 };
 
 ColumnSizer.defaultProps = {

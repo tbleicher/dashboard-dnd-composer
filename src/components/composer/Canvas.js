@@ -35,7 +35,7 @@ const Canvas = ({ layout }) => {
   const Sizer = frameTypesMap[layout.type];
 
   return (
-    <Background height={height + 80}>
+    <Background id="canvas" height={height + 80}>
       <Sizer layout={layout} framesMap={frameTypesMap} />
     </Background>
   );

@@ -25,7 +25,12 @@ const Sizer = ({ framesMap, layout, frameDimensions }) => {
     // render children by their type
     const Component = framesMap[row.type];
     agg.push(
-      <Component key={index} layout={row} {...getFrameSize(row, index)} />
+      <Component
+        framesMap={framesMap}
+        key={index}
+        layout={row}
+        {...getFrameSize(row, index)}
+      />
     );
 
     return agg;
@@ -42,7 +47,7 @@ const Sizer = ({ framesMap, layout, frameDimensions }) => {
     />
   );
 
-  return nodes;
+  return <>{nodes}</>;
 };
 
 export default Sizer;

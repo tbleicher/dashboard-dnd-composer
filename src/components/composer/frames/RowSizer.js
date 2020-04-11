@@ -36,7 +36,11 @@ const RowSizer = (props) => {
     }),
   };
 
-  return <Sizer {...sizerProps} frameDimensions={frameDimensions} />;
+  return (
+    <div style={{ display: "flex", outline: "1px solid green" }}>
+      <Sizer {...sizerProps} frameDimensions={frameDimensions} />
+    </div>
+  );
 };
 
 RowSizer.defaultProps = {

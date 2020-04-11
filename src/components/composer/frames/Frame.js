@@ -1,8 +1,13 @@
 import React from "react";
-import { Box } from "@chakra-ui/core";
+import { Box, Icon } from "@chakra-ui/core";
 
 const Frame = ({ width = 80, height = 80 }) => {
-  return <Box width={width} height={height} bg="grey.50" />;
+  console.log("Frame", width, height);
+  return (
+    <Box width={width} height={height} bg="brand.100">
+      <Icon name="frame" size={12} fill="brand.300" m="6px" />
+    </Box>
+  );
 };
 
 export default Frame;
