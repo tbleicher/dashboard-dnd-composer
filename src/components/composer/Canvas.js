@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
-import DropTarget from "./DropTarget";
+import ColumnSizer from "./ColumnSizer";
 import RowSizer from "./RowSizer";
+import frameTypes from "./frameTypes";
 
 const Background = styled.div`
   display: flex;
@@ -13,42 +14,32 @@ const Background = styled.div`
     linear-gradient(to bottom, lightgrey 1px, transparent 1px);
 `;
 
-const renderRows = (rows, parent, height = 20) => {
-  const nodes = rows.reduce((agg, row, index) => {
-    const _height = index === 0 ? height / 2 : height;
+const renderLayout = (layout) => {
+  if (layout.type === frameTypes.COLUMN) {
+    return <ColumnSizer layout={layout} RowSizer={RowSizer} />;
+  }
 
-    agg.push(
-      <DropTarget
-        key={`target_${index}`}
-        height={_height}
-        index={index}
-        parent={parent}
-      />
-    );
-
-    agg.push(<RowSizer key={index} {...row} height={row.height - height} />);
-    return agg;
-  }, []);
-
-  nodes.push(
-    <DropTarget
-      key="top"
-      height="100%"
-      index={rows.length}
-      flexGrow={1}
-      parent={parent}
-    />
-  );
-  return nodes;
+  if (layout.type === frameTypes.ROW) {
+    return renderColums(layout);
+  }
 };
 
-const getHeightFromLayout = (layout) => {
-  return layout.map((row) => row.height).reduce((sum, h) => sum + h, 0);
+const renderColums = () => {
+  // TODO
+  return null;
 };
 
-const Canvas = ({ id, layout }) => {
-  const height = getHeightFromLayout(layout);
-  return <Background height={height + 80}>{renderRows(layout, id)}</Background>;
+const getHeight = (layout) => {
+  if (layout.type === frameTypes.COLUMN) {
+    return layout.children
+      .map((row) => row.height)
+      .reduce((sum, h) => sum + h, 0);
+  }
+};
+
+const Canvas = ({ layout }) => {
+  const height = getHeight(layout);
+  return <Background height={height + 80}>{renderLayout(layout)}</Background>;
 };
 
 export default Canvas;

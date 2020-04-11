@@ -13,11 +13,15 @@ const withLogging = (reducer) => (state, action) => {
 
 const addElement = (type) => (state, action) => {
   // TODO: use action.parent and allow for nesting
-  return [
-    ...state.slice(0, action.index),
-    { id: shortid.generate(), height: 80, children: [], type },
-    ...state.slice(action.index),
-  ];
+  if (state.id === action.parent) {
+    const children = [
+      ...state.children.slice(0, action.index),
+      { id: shortid.generate(), height: 80, children: [], type },
+      ...state.children.slice(action.index),
+    ];
+
+    return { ...state, children };
+  }
 };
 
 const addRow = addElement(frameTypes.ROW);

@@ -1,10 +1,9 @@
 import React from "react";
 import { useDrop } from "react-dnd";
-import toolTypes from "./toolTypes";
 
-const DropTarget = ({ height, index, parent }) => {
+const DropTarget = ({ accept, index, parent, ...displayProps }) => {
   const [{ canDrop, isOver }, drop] = useDrop({
-    accept: toolTypes.ADD_ROW,
+    accept,
     drop: () => {
       return { index, parent };
     },
@@ -14,23 +13,30 @@ const DropTarget = ({ height, index, parent }) => {
     }),
   });
 
+  const { targetColor, hoverColor, hoverOpacity, ...styleProps } = displayProps;
   const style = {
-    // backgroundColor: "yellow",
-    opacity: 0.2,
-    height,
-    width: "100%",
+    ...styleProps,
     flexGrow: 0,
     flexShrink: 0,
   };
 
   if (canDrop && isOver) {
-    style.backgroundColor = "green";
-    style.opacity = 0.5;
+    style.backgroundColor = hoverColor;
+    style.opacity = hoverOpacity;
   } else if (canDrop) {
-    style.backgroundColor = "green";
+    style.backgroundColor = targetColor;
   }
 
   return <div ref={drop} style={style} />;
+};
+
+DropTarget.defaultProps = {
+  opacity: 0.2,
+  hoverColor: "green",
+  hoverOpacity: 0.5,
+  targetColor: "green",
+  height: "100%",
+  width: "100%",
 };
 
 export default DropTarget;

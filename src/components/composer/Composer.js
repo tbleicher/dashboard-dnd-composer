@@ -8,10 +8,14 @@ import Toolbar from "./Toolbar";
 import layoutReducer from "./layoutReducer";
 import frameTypes from "./frameTypes";
 
-const initialLayout = [
-  { id: shortid.generate(), height: 80, children: [], type: frameTypes.ROW },
-  { id: shortid.generate(), height: 160, children: [], type: frameTypes.ROW },
-];
+const initialLayout = {
+  id: "DASHBOARD-LAYOUT-ID",
+  children: [
+    { id: shortid.generate(), height: 80, children: [], type: frameTypes.ROW },
+    { id: shortid.generate(), height: 160, children: [], type: frameTypes.ROW },
+  ],
+  type: frameTypes.COLUMN,
+};
 
 const Composer = () => {
   const [layout, dispatch] = React.useReducer(layoutReducer, initialLayout);
@@ -19,7 +23,7 @@ const Composer = () => {
   return (
     <DndProvider backend={Backend}>
       <Flex>
-        <Canvas layout={layout} id="DASHBOARD-LAYOUT-ID" />
+        <Canvas layout={layout} />
         <Toolbar dispatch={dispatch} />
       </Flex>
     </DndProvider>
