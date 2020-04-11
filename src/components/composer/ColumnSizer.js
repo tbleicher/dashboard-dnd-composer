@@ -1,50 +1,40 @@
 import React from "react";
-import DropTarget from "./DropTarget";
-import toolTypes from "./toolTypes";
+import Sizer from "./Sizer";
 
-const renderRows = (layout, targetHeight, RowSizer) => {
-  const { id: parent, children } = layout;
+const getWidth = (layout) => {
+  const { children, width } = layout;
 
-  const dropTargetProps = {
-    accept: [toolTypes.ADD_ROW],
-    parent,
-  };
+  if (children && children.length) {
+    return children.map(getWidth).reduce((sum, w) => sum + w, 0);
+  }
 
-  const nodes = children.reduce((agg, row, index) => {
-    // drop target for new frame at the top and in-between frames
-    agg.push(
-      <DropTarget
-        key={`target_${index}`}
-        height={index === 0 ? targetHeight / 2 : targetHeight}
-        index={index}
-        {...dropTargetProps}
-      />
-    );
+  if (layout.type === "ROW" && children.length === 0) return "100%";
 
-    // row with content
-    agg.push(
-      <RowSizer key={index} {...row} height={row.height - targetHeight} />
-    );
-
-    return agg;
-  }, []);
-
-  // drop target at the bottom to append a new frame
-  nodes.push(
-    <DropTarget
-      key="top"
-      height={80 + targetHeight / 2}
-      index={children.length}
-      flexGrow={0}
-      {...dropTargetProps}
-    />
-  );
-
-  return nodes;
+  return width || 80;
 };
 
-const ColumnSizer = ({ RowSizer, layout, targetHeight = 20 }) => {
-  return renderRows(layout, targetHeight, RowSizer);
+const ColumnSizer = (props) => {
+  const { targetHeight, ...sizerProps } = props;
+
+  const frameDimensions = {
+    // height for first and intermediate drop targets
+    getTargetSize: (frame, index) => ({
+      height: index === 0 ? targetHeight / 2 : targetHeight,
+    }),
+    // height for child frames
+    getFrameSize: (frame, index) => ({
+      width: frame.children ? getWidth(frame) : "100%",
+      height: frame.height - targetHeight,
+    }),
+    // height for final target
+    getFinalTargetSize: () => ({ flexGrow: 1, height: 80 + targetHeight / 2 }),
+  };
+
+  return <Sizer {...sizerProps} frameDimensions={frameDimensions} />;
+};
+
+ColumnSizer.defaultProps = {
+  targetHeight: 20,
 };
 
 export default ColumnSizer;

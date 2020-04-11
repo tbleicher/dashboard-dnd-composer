@@ -1,31 +1,47 @@
 import React from "react";
+import Sizer from "./Sizer";
+
+const getHeight = (layout) => {
+  const { children, height } = layout;
+
+  if (children && children.length) {
+    return Math.max(...children.map(getHeight));
+  }
+
+  return height || 80;
+};
 
 const RowSizer = (props) => {
-  const { height } = props;
+  const { targetWidth, ...sizerProps } = props;
+  const height = getHeight(props.layout) - targetWidth;
 
-  return (
-    <div
-      style={{
-        boxSizing: "border-box",
-        width: "100%",
-        height: `${height}px`,
-        flexGrow: 0,
-        flexShrink: 0,
-      }}
-    >
-      <div style={{ border: "1px solid green", width: "100%", height: "100%" }}>
-        <div
-          style={{
-            // backgroundColor: "yellow",
-            width: "100%",
-            height: "100%",
+  const frameDimensions = {
+    // height for first and intermediate drop targets
+    getTargetSize: (frame, index) => ({
+      flexGrow: 0,
+      height,
+      width: index === 0 ? targetWidth / 2 : targetWidth,
+    }),
+    // height for child frames
+    getFrameSize: (frame, index) => ({
+      flexGrow: 0,
+      height,
+      width: frame.width - targetWidth,
+    }),
+    // height for final target
+    getFinalTargetSize: (children) => ({
+      flexGrow: 1,
+      height,
+      width: children.length ? 80 - targetWidth : "100%",
+    }),
+  };
 
-            opacity: 0.2,
-          }}
-        />
-      </div>
-    </div>
-  );
+  console.log("RowSizer.render()");
+  return <Sizer {...sizerProps} frameDimensions={frameDimensions} />;
+};
+
+RowSizer.defaultProps = {
+  targetWidth: 20,
 };
 
 export default RowSizer;

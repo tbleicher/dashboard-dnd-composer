@@ -16,6 +16,7 @@ const addElement = (type) => (state, action) => {
   if (state.id === action.parent) {
     const children = [
       ...state.children.slice(0, action.index),
+      // TODO: use template or generator
       { id: shortid.generate(), height: 80, children: [], type },
       ...state.children.slice(action.index),
     ];
@@ -33,6 +34,7 @@ const layoutReducer = (state, action) => {
     case "ADD_ROW":
       return withLogging(addRow)(state, action);
     default:
+      console.warn(action.type);
       return state;
   }
 };
