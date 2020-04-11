@@ -1,8 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import frameTypes from "./frameTypes";
-import ColumnSizer from "./ColumnSizer";
-import RowSizer from "./RowSizer";
+import { frameTypes, frameTypesMap } from "./frames";
 
 const Background = styled.div`
   display: flex;
@@ -13,10 +11,6 @@ const Background = styled.div`
   background-image: linear-gradient(to right, lightgrey 1px, transparent 1px),
     linear-gradient(to bottom, lightgrey 1px, transparent 1px);
 `;
-
-const framesMap = {};
-framesMap[frameTypes.COLUMN] = ColumnSizer;
-framesMap[frameTypes.ROW] = RowSizer;
 
 const getHeight = (layout) => {
   const { children, type } = layout;
@@ -38,11 +32,11 @@ const getHeight = (layout) => {
 
 const Canvas = ({ layout }) => {
   const height = getHeight(layout);
-  const Sizer = framesMap[layout.type];
+  const Sizer = frameTypesMap[layout.type];
 
   return (
     <Background height={height + 80}>
-      <Sizer layout={layout} framesMap={framesMap} />
+      <Sizer layout={layout} framesMap={frameTypesMap} />
     </Background>
   );
 };

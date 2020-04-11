@@ -5,7 +5,7 @@ import { Flex } from "@chakra-ui/core";
 import Canvas from "./Canvas";
 import Toolbar from "./Toolbar";
 import layoutReducer, { newElement } from "./layoutReducer";
-import frameTypes from "./frameTypes";
+import { frameTypes } from "./frames";
 import toolTypes from "./toolTypes";
 
 const initialLayout = {

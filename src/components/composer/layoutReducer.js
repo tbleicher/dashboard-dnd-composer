@@ -1,5 +1,5 @@
 import shortid from "shortid";
-import frameTypes from "./frameTypes";
+import { frameTypes } from "./frames";
 import toolTypes from "./toolTypes";
 
 const withLogging = (reducer) => (state, action) => {
