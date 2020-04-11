@@ -2,11 +2,11 @@ import React from "react";
 import Backend from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { Flex } from "@chakra-ui/core";
+
 import Canvas from "./Canvas";
-import Toolbar from "./Toolbar";
-import layoutReducer, { newElement } from "./layoutReducer";
 import { frameTypes } from "./frames";
-import toolTypes from "./toolTypes";
+import layoutReducer, { newElement } from "./layoutReducer";
+import { Toolbar, toolTypes } from "./tools";
 
 const initialLayout = {
   id: "DASHBOARD-LAYOUT-ID",

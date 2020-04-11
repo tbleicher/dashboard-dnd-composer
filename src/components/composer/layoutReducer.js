@@ -1,6 +1,6 @@
 import shortid from "shortid";
 import { frameTypes } from "./frames";
-import toolTypes from "./toolTypes";
+import { toolTypes } from "./tools";
 
 const withLogging = (reducer) => (state, action) => {
   const newState = reducer(state, action);
