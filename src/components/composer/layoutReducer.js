@@ -43,9 +43,16 @@ export const newElement = (type, options = {}) => {
   };
 };
 
+const getIds = (frame) => {
+  if (!frame.children) return [frame.id];
+
+  return [frame.id, ...frame.children.map(getIds)];
+};
 const includesParent = (children, parent) => {
+  console.log("getIds", children.map(getIds).flat(10));
+
   // TODO: support nested children
-  return children.map((c) => c.id).includes(parent);
+  return children.map(getIds).flat(10).includes(parent);
 };
 
 const addElement = (type) => (state, action) => {
@@ -60,6 +67,7 @@ const addElement = (type) => (state, action) => {
   }
 
   if (includesParent(state.children, action.parent)) {
+    console.log(`includesParent(${state.id}, ${action.parent})`);
     return {
       ...state,
       children: state.children.map((child) => {
