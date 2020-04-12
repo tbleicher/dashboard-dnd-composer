@@ -15,14 +15,10 @@ import { getFrameHeight, getFrameWidth } from "./utils";
  * @param {number} maxHeight
  * @param {number} targetHeight
  */
-const getDisplayHeight = (frame, maxHeight, targetHeight) => {
+const getDisplayHeight = (frame, maxHeight) => {
   if (frame.type === frameTypes.COLUMN) return maxHeight;
 
-  if (frame.height < maxHeight) {
-    return frame.height - targetHeight / 2;
-  }
-
-  return frame.height - targetHeight;
+  return frame.height;
 };
 
 /**
@@ -33,16 +29,18 @@ const getDisplayHeight = (frame, maxHeight, targetHeight) => {
  */
 const getFinalTargetSize = (props) => (frames) => {
   const { layoutOptions } = props;
-  const { maxWidth, targetHeight } = layoutOptions;
+  const { gridRowHeight, maxWidth, targetHeight, targetWidth } = layoutOptions;
 
-  const height = frames.length
-    ? Math.max(...frames.map(getFrameHeight(layoutOptions)))
-    : layoutOptions.gridRowHeight;
+  // without frames the last target spans the whole width
+  if (!frames.length) {
+    return {
+      height: gridRowHeight - targetHeight,
+      width: maxWidth - targetWidth,
+    };
+  }
 
-  const width = frames.length
-    ? maxWidth -
-      frames.map(getFrameWidth(layoutOptions)).reduce((sum, w) => sum + w, 0)
-    : maxWidth;
+  const height = Math.max(...frames.map(getFrameHeight(layoutOptions)));
+  const width = maxWidth - getInnerWidth(frames, layoutOptions);
 
   return { height: height - targetHeight, width };
 };
@@ -58,25 +56,36 @@ const getInnerHeight = (frames, layoutOptions) => {
   return Math.max(...heights);
 };
 
-const RowSizer = (props) => {
-  const { layout, layoutOptions } = props;
+/**
+ * get the height of a RowSizer's children array (max of heights)
+ *
+ * @param {array} frames
+ */
+const getInnerWidth = (frames, layoutOptions) => {
+  return frames
+    .map(getFrameWidth(layoutOptions))
+    .reduce((sum, w) => sum + w, 0);
+};
 
-  const { targetHeight } = layoutOptions;
-  const maxHeight =
-    getInnerHeight(layout.children, layoutOptions) - targetHeight;
+const RowSizer = (props) => {
+  const { children, height, layoutOptions, level } = props;
+
+  const { targetHeight, targetWidth } = layoutOptions;
+  const innerHeight = getInnerHeight(children, layoutOptions);
+  const maxHeight = level ? innerHeight - targetHeight : innerHeight;
 
   const frameDimensions = {
     // height for first and intermediate drop targets
     getTargetSize: (frame, index) => ({
       flexGrow: 0,
-      height: maxHeight,
-      width: index === 0 ? targetHeight / 2 : targetHeight,
+      height: height - targetHeight,
+      width: targetWidth,
     }),
     // height for child frames
     getFrameSize: (frame, index) => ({
       flexGrow: 0,
-      height: getDisplayHeight(frame, maxHeight, targetHeight),
-      width: getFrameWidth(layoutOptions)(frame) - targetHeight,
+      height: getDisplayHeight(frame, maxHeight),
+      width: getFrameWidth(layoutOptions)(frame),
     }),
     // height for final target
     getFinalTargetSize: getFinalTargetSize(props, props.width),
@@ -88,8 +97,10 @@ const RowSizer = (props) => {
       {...layoutOptions}
       gridColumnWidth={props.level === 0 ? layoutOptions.gridColumnWidth : 0}
       gridRowHeight={props.level === 0 ? layoutOptions.gridRowHeight : 0}
+      width={200}
+      level={props.level}
     >
-      <Sizer layout={layout} {...props} frameDimensions={frameDimensions} />
+      <Sizer {...props} frameDimensions={frameDimensions} />
     </Background>
   );
 };

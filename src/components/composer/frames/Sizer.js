@@ -12,12 +12,18 @@ import DropTarget from "./DropTarget";
 const renderFrame = (frame, index, getFrameSize, frameProps) => {
   const Component = frameProps.framesMap[frame.type];
 
+  // update layoutOptions maxWidth
+  const layoutOptions =
+    frameProps.type === "COLUMN"
+      ? { ...frameProps.layoutOptions, maxWidth: frameProps.width }
+      : frameProps.layoutOptions;
+
   return (
     <Component
       key={index}
       {...frameProps}
+      layoutOptions={layoutOptions}
       level={frameProps.level + 1}
-      layout={frame}
       {...frame}
       {...getFrameSize(frame, index)}
     />
@@ -26,7 +32,6 @@ const renderFrame = (frame, index, getFrameSize, frameProps) => {
 
 const Sizer = (props) => {
   const { accept, children, id, frameDimensions, ...frameProps } = props;
-
   const dropTargetProps = {
     accept,
     parent: id,
@@ -36,14 +41,17 @@ const Sizer = (props) => {
 
   const nodes = children.reduce((agg, frame, index) => {
     // drop target for new frame at the top and in-between frames
-    agg.push(
-      <DropTarget
-        key={`target_${index}`}
-        index={index}
-        {...getTargetSize(frame, index)}
-        {...dropTargetProps}
-      />
-    );
+    // TODO: drop target before/above first frame
+    if (index !== 0) {
+      agg.push(
+        <DropTarget
+          key={`target_${index}`}
+          index={index}
+          {...getTargetSize(frame, index)}
+          {...dropTargetProps}
+        />
+      );
+    }
 
     // the frame itself
     agg.push(renderFrame(frame, index, getFrameSize, frameProps));
@@ -51,7 +59,7 @@ const Sizer = (props) => {
     return agg;
   }, []);
 
-  // drop target at the bottom to append a new frame
+  // TODO: drop target at the bottom to append a new frame
   nodes.push(
     <DropTarget
       backgroundColor={children.length ? undefined : "green"}

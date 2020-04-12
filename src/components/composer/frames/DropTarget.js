@@ -13,6 +13,12 @@ const DropTarget = ({ accept, index, parent, ...displayProps }) => {
     }),
   });
 
+  if (displayProps.disabled) {
+    const { height, width } = displayProps;
+
+    return height ? <div style={{ width, height }} /> : null;
+  }
+
   const { targetColor, hoverColor, hoverOpacity, ...styleProps } = displayProps;
   const style = {
     ...styleProps,
@@ -23,7 +29,7 @@ const DropTarget = ({ accept, index, parent, ...displayProps }) => {
   if (!canDrop) {
     // TODO: highlight background of first row even if dragging is not in progress
     // to invite user to interact with canvas and add a frame or a second row
-    style.backgroundColor = "";
+    // style.backgroundColor = "violet";
   } else if (canDrop && isOver) {
     style.backgroundColor = hoverColor;
     style.opacity = hoverOpacity;

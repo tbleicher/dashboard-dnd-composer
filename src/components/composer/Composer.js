@@ -17,7 +17,6 @@ const initialLayout = {
 };
 
 const Composer = () => {
-  console.log(initialLayout);
   const [layout, dispatch] = React.useReducer(layoutReducer, initialLayout);
 
   return (

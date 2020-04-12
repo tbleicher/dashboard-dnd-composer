@@ -1,7 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 import { Flex, Icon } from "@chakra-ui/core";
-import { GRID_COLUMN_WIDTH, GRID_ROW_HEIGHT } from "../constants";
 
 const FramePropTypes = {
   id: PropTypes.string.isRequired,
@@ -15,14 +14,17 @@ const FramePropTypes = {
  * @property {number} width
  * @property {number} height
  */
-const Frame = ({ width = GRID_COLUMN_WIDTH, height = GRID_ROW_HEIGHT }) => {
+const Frame = (props) => {
+  const { width, height, layoutOptions } = props;
+  const { targetHeight, targetWidth } = layoutOptions;
+
   return (
     <Flex
       bg="brand.100"
       align="center"
       justify="center"
-      width={`${width}px`}
-      height={`${height}px`}
+      width={`${width - targetWidth}px`}
+      height={`${height - targetHeight}px`}
       flexGrow={0}
       flexShrink={0}
       borderRadius="lg"
