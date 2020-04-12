@@ -11,6 +11,16 @@ const headerLeft = newElement(frameTypes.FRAME, {
 });
 header.children = [headerLeft];
 
+// nested columns
+const col1 = newElement(frameTypes.COLUMN, { id: "col1" });
+const col1frm1 = newElement(frameTypes.FRAME, { id: "col1-frm1" });
+const col1frm2 = newElement(frameTypes.FRAME, { id: "col1-frm2" });
+col1.children = [col1frm1, col1frm2];
+
+const col2 = newElement(frameTypes.COLUMN, { id: "col2" });
+const col2frm1 = newElement(frameTypes.FRAME, { id: "col2-frm1" });
+col2.children = [col2frm1];
+
 // mixed content row
 const row2 = newElement(frameTypes.ROW, { id: "row2" });
 const frame1 = newElement(frameTypes.FRAME, {
@@ -21,8 +31,7 @@ const frame1 = newElement(frameTypes.FRAME, {
 const frame2 = newElement(frameTypes.FRAME, { id: "frame2" });
 const frame3 = newElement(frameTypes.FRAME, { id: "frame3", height: 120 });
 
-const col1 = newElement(frameTypes.COLUMN, { id: "col1" });
-row2.children = [frame1, frame2, frame3, col1];
+row2.children = [frame1, frame2, col1, frame3, col2];
 
 // generate a fully filled row
 const fullRow = (maxWidth) => {
