@@ -1,21 +1,28 @@
 import React from "react";
+import { PropTypes } from "prop-types";
 import Sizer from "./Sizer";
-import { GRID_COLUMN_WIDTH } from "../constants";
+import { GRID_ROW_HEIGHT } from "../constants";
+import { getFrameHeight, getFrameWidth } from "./utils";
 
-const getWidth = (layout) => {
-  const { children, width } = layout;
+const getFrameSize = (layoutOptions) => (frame) => {
+  const { targetHeight } = layoutOptions;
 
-  if (children && children.length) {
-    return children.map(getWidth).reduce((sum, w) => sum + w, 0);
-  }
+  const height = getFrameHeight(layoutOptions)(frame) - targetHeight;
+  const width = getFrameWidth(layoutOptions)(frame);
 
-  if (layout.type === "ROW" && children.length === 0) return "100%";
+  return { width, height };
+};
 
-  return width || GRID_COLUMN_WIDTH;
+const getFinalTargetSize = ({ height, layoutOptions }) => (frames) => {
+  const { targetHeight } = layoutOptions;
+  if (frames.length === 0) return height;
+
+  return { height: GRID_ROW_HEIGHT + targetHeight / 2 };
 };
 
 const ColumnSizer = (props) => {
-  const { targetHeight, ...sizerProps } = props;
+  const { height, layoutOptions, width } = props;
+  const { targetHeight } = layoutOptions;
 
   const frameDimensions = {
     // height for first and intermediate drop targets
@@ -23,30 +30,25 @@ const ColumnSizer = (props) => {
       height: index === 0 ? targetHeight / 2 : targetHeight,
     }),
     // height for child frames
-    getFrameSize: (frame, index) => ({
-      width: frame.children ? getWidth(frame) : "100%",
-      height: frame.height - targetHeight,
-    }),
+    getFrameSize: getFrameSize(layoutOptions),
+
     // height for final target
-    getFinalTargetSize: (frames) => ({
-      flexGrow: 1,
-      height: GRID_COLUMN_WIDTH + targetHeight / 2,
-    }),
+    getFinalTargetSize: getFinalTargetSize(props),
   };
 
   return (
     <div
       data-type="ColumnSizer"
-      style={{ outline: "1px solid green", width: "100%" }}
+      style={{ outline: "1px solid green", height, width, flexGrow: 0 }}
     >
-      <Sizer {...sizerProps} frameDimensions={frameDimensions} />
+      <Sizer frameDimensions={frameDimensions} {...props} />
     </div>
   );
-  // return <Sizer {...sizerProps} frameDimensions={frameDimensions} />;
 };
 
-ColumnSizer.defaultProps = {
-  targetHeight: 20,
+ColumnSizer.propTypes = {
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default ColumnSizer;

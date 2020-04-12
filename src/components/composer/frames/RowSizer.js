@@ -1,8 +1,19 @@
 import React from "react";
+import { PropTypes } from "prop-types";
 import Sizer from "./Sizer";
-import { GRID_COLUMN_WIDTH, GRID_ROW_HEIGHT } from "../constants";
 import { frameTypes } from ".";
+import { getFrameHeight, getFrameWidth } from "./utils";
 
+/**
+ * calculate real height of a frame during layout
+ *
+ * The grid-aligned height of a frame is reduced during layout
+ * to make space for drop targets and column/row wrappers
+ *
+ * @param {Frame} frame
+ * @param {number} maxHeight
+ * @param {number} targetHeight
+ */
 const getDisplayHeight = (frame, maxHeight, targetHeight) => {
   if (frame.type === frameTypes.COLUMN) return maxHeight;
 
@@ -13,31 +24,45 @@ const getDisplayHeight = (frame, maxHeight, targetHeight) => {
   return frame.height - targetHeight;
 };
 
-const getMaxHeight = (frames) => {
-  const heights = frames.map(getHeight);
-  console.log(heights);
+/**
+ * calculate width and height for the final drop target in a RowSizer
+ *
+ * @param {any} props - the Frame props (includes children)
+ * @param {number} maxWidth
+ */
+const getFinalTargetSize = (props) => (frames) => {
+  const { layoutOptions } = props;
+  const { maxWidth, targetHeight } = layoutOptions;
+
+  const height = frames.length
+    ? Math.max(...frames.map(getFrameHeight(layoutOptions)))
+    : layoutOptions.gridRowHeight;
+
+  const width = frames.length
+    ? maxWidth -
+      frames.map(getFrameWidth(layoutOptions)).reduce((sum, w) => sum + w, 0)
+    : maxWidth;
+
+  return { height: height - targetHeight, width };
+};
+
+/**
+ * get the height of a RowSizer's children array (max of heights)
+ *
+ * @param {array} frames
+ */
+const getInnerHeight = (frames, layoutOptions) => {
+  const heights = frames.map(getFrameHeight(layoutOptions));
 
   return Math.max(...heights);
 };
 
-const getHeight = (frame) => {
-  const { children, id, type, height } = frame;
-  console.log(id, type, height);
-
-  if (height) return height;
-
-  if (children && children.length) {
-    return Math.max(...children.map(getHeight));
-  }
-
-  return GRID_ROW_HEIGHT;
-};
-
 const RowSizer = (props) => {
-  const { layout, targetHeight, ...sizerProps } = props;
-  const maxHeight = getMaxHeight(layout.children) - targetHeight;
+  const { layout, layoutOptions } = props;
 
-  console.log("RowSizer", layout.id, maxHeight);
+  const { targetHeight } = layoutOptions;
+  const maxHeight =
+    getInnerHeight(layout.children, layoutOptions) - targetHeight;
 
   const frameDimensions = {
     // height for first and intermediate drop targets
@@ -50,14 +75,10 @@ const RowSizer = (props) => {
     getFrameSize: (frame, index) => ({
       flexGrow: 0,
       height: getDisplayHeight(frame, maxHeight, targetHeight),
-      width: frame.width - targetHeight,
+      width: getFrameWidth(layoutOptions)(frame) - targetHeight,
     }),
     // height for final target
-    getFinalTargetSize: (children) => ({
-      flexGrow: 1,
-      height: maxHeight,
-      width: children.length ? GRID_COLUMN_WIDTH - targetHeight : "100%",
-    }),
+    getFinalTargetSize: getFinalTargetSize(props, props.width),
   };
 
   return (
@@ -65,17 +86,14 @@ const RowSizer = (props) => {
       data-type="RowSizer"
       style={{ display: "flex", outline: "1px solid green" }}
     >
-      <Sizer
-        layout={layout}
-        {...sizerProps}
-        frameDimensions={frameDimensions}
-      />
+      <Sizer layout={layout} {...props} frameDimensions={frameDimensions} />
     </div>
   );
 };
 
-RowSizer.defaultProps = {
-  targetHeight: 20,
+RowSizer.propTypes = {
+  height: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired,
 };
 
 export default RowSizer;

@@ -1,6 +1,7 @@
 import ColumnSizer from "./ColumnSizer";
 import RowSizer from "./RowSizer";
 import Frame from "./Frame";
+import { getFrameHeight, getFrameWidth } from "./utils";
 
 const frameTypes = {
   CHART: "CHART",
@@ -21,4 +22,12 @@ const frameTypesMap = Object.keys(frameTypes).reduce((mapping, key) => {
 frameTypesMap[frameTypes.COLUMN] = ColumnSizer;
 frameTypesMap[frameTypes.ROW] = RowSizer;
 
-export { ColumnSizer, Frame, RowSizer, frameTypes, frameTypesMap };
+export {
+  ColumnSizer,
+  Frame,
+  RowSizer,
+  frameTypes,
+  frameTypesMap,
+  getFrameHeight,
+  getFrameWidth,
+};

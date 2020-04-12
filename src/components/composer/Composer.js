@@ -22,7 +22,8 @@ const frame4 = newElement(frameTypes.FRAME, {
   width: 160,
   height: 60,
 });
-row1.children = [frame1, frame2, frame3];
+const col1 = newElement(frameTypes.COLUMN, { id: "col1" });
+row1.children = [frame1, frame2, frame3, col1];
 row2.children = [frame4];
 
 const initialLayout = {
