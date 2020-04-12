@@ -84,7 +84,12 @@ const RowSizer = (props) => {
   return (
     <div
       data-type="RowSizer"
-      style={{ display: "flex", outline: "1px solid green" }}
+      style={{
+        display: "flex",
+        borderRadius: 8,
+        border: "1px solid blue",
+        margin: -1,
+      }}
     >
       <Sizer layout={layout} {...props} frameDimensions={frameDimensions} />
     </div>

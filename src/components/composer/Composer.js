@@ -22,7 +22,7 @@ const Composer = () => {
 
   return (
     <DndProvider backend={Backend}>
-      <Flex>
+      <Flex justify="space-between" m={4}>
         <Canvas layout={layout} />
         <Toolbar dispatch={dispatch} />
       </Flex>

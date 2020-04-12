@@ -8,7 +8,7 @@ const customTheme = {
   colors: {
     ...theme.colors,
     brand: {
-      ...theme.colors.green,
+      ...theme.colors.blue,
     },
   },
   icons: {

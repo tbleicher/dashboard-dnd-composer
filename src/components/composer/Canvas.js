@@ -50,8 +50,8 @@ Canvas.defaultProps = {
   layoutOptions: {
     gridRowHeight: GRID_ROW_HEIGHT,
     gridColumnWidth: GRID_COLUMN_WIDTH,
-    targetHeight: 20,
-    targetWidth: 20,
+    targetHeight: 16,
+    targetWidth: 16,
   },
   width: 640,
 };

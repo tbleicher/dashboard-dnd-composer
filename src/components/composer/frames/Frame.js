@@ -25,6 +25,7 @@ const Frame = ({ width = GRID_COLUMN_WIDTH, height = GRID_ROW_HEIGHT }) => {
       height={`${height}px`}
       flexGrow={0}
       flexShrink={0}
+      borderRadius="lg"
     >
       <Icon name="frame" size={12} fill="brand.300" />
     </Flex>

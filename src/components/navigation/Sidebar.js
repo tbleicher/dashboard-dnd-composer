@@ -10,7 +10,7 @@ const MenuItems = ({ children }) => (
 
 const Sidebar = (props) => {
   return (
-    <Stack as="nav" padding="1rem" bg="brand.500" color="white" {...props}>
+    <Stack as="nav" padding="1rem" bg="brand.100" color="brand.700" {...props}>
       <Heading as="h2" size="lg" mt={0}>
         Main Nav
       </Heading>

@@ -38,7 +38,9 @@ const Breadcrumbs = (props) => {
 
   return (
     <Container bg="brand.900">
-      <Flex p={4}>{renderBreadcrumbs(links)}</Flex>
+      <Flex px={4} py={1}>
+        {renderBreadcrumbs(links)}
+      </Flex>
     </Container>
   );
 };
