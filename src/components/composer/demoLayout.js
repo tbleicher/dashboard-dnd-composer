@@ -36,7 +36,6 @@ row2.children = [frame1, frame2, col1, frame3, col2];
 // generate a fully filled row
 const fullRow = (maxWidth) => {
   const fullFrame = (_, index) => {
-    console.log("fullFrame", index);
     return newElement(frameTypes.FRAME, {
       id: `full${index + 1}`,
       width: 160,
@@ -48,7 +47,6 @@ const fullRow = (maxWidth) => {
     .fill(true)
     .map(fullFrame);
 
-  console.log(children);
   const row = newElement(frameTypes.ROW, {
     id: "fullRow",
   });

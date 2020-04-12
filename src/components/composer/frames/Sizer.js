@@ -14,8 +14,9 @@ const renderFrame = (frame, index, getFrameSize, frameProps) => {
 
   return (
     <Component
-      {...frameProps}
       key={index}
+      {...frameProps}
+      level={frameProps.level + 1}
       layout={frame}
       {...frame}
       {...getFrameSize(frame, index)}
@@ -82,6 +83,7 @@ Sizer.propTypes = {
     targetHeight: PropTypes.number.isRequired,
     targetWidth: PropTypes.number.isRequired,
   }).isRequired,
+  level: PropTypes.number.isRequired,
 };
 
 export default Sizer;

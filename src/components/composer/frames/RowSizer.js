@@ -1,5 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
+import Background from "./Background";
 import Sizer from "./Sizer";
 import { frameTypes } from ".";
 import { getFrameHeight, getFrameWidth } from "./utils";
@@ -82,17 +83,14 @@ const RowSizer = (props) => {
   };
 
   return (
-    <div
-      data-type="RowSizer"
-      style={{
-        display: "flex",
-        borderRadius: 8,
-        border: "1px solid blue",
-        margin: -1,
-      }}
+    <Background
+      data-type="background"
+      {...layoutOptions}
+      gridColumnWidth={props.level === 0 ? layoutOptions.gridColumnWidth : 0}
+      gridRowHeight={props.level === 0 ? layoutOptions.gridRowHeight : 0}
     >
       <Sizer layout={layout} {...props} frameDimensions={frameDimensions} />
-    </div>
+    </Background>
   );
 };
 

@@ -3,18 +3,9 @@ import styled from "styled-components";
 import { frameTypesMap, getFrameHeight } from "./frames";
 import { GRID_COLUMN_WIDTH, GRID_ROW_HEIGHT } from "./constants";
 
-const getBackgroundSize = (props) => {
-  return `${props.gridColumnWidth}px ${props.gridRowHeight}px`;
-};
-
 const Background = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${(props) => props.width}px;
-  height: ${(props) => props.height}px;
-  background-size: ${(props) => getBackgroundSize(props)};
-  background-image: linear-gradient(to right, lightgrey 1px, transparent 1px),
-    linear-gradient(to bottom, lightgrey 1px, transparent 1px);
 `;
 
 const getHeight = (layout, options) => {
@@ -34,10 +25,11 @@ const Canvas = ({ layout, layoutOptions, width }) => {
   };
 
   return (
-    <Background {...options} id="canvas" height={options.maxHeight} width={640}>
+    <Background id="canvas" height={options.maxHeight} width={640}>
       <Sizer
         {...layout}
         layoutOptions={options}
+        level={-1}
         framesMap={frameTypesMap}
         height={height}
         width={width}
