@@ -5,7 +5,7 @@ const ChartFrame = (props) => {
   return <Frame {...props} />;
 };
 ChartFrame.defaultProps = {
-  icon: "image",
+  icon: "chart",
 };
 
 export default ChartFrame;

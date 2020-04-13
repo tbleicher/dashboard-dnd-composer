@@ -4,7 +4,7 @@ import { DndProvider } from "react-dnd";
 import { Flex } from "@chakra-ui/core";
 
 import Canvas from "./Canvas";
-import { frameTypes } from "./frames";
+import { frameTypes, toolbarConfig } from "./frames";
 import layoutReducer, { demoLayout } from "reducers/layout";
 import { Toolbar } from "./tools";
 
@@ -22,7 +22,7 @@ const Composer = (props) => {
     <DndProvider backend={Backend}>
       <Flex justify="space-between" m={4}>
         <Canvas {...props} layout={layout} />
-        <Toolbar dispatch={dispatch} />
+        <Toolbar dispatch={dispatch} tools={toolbarConfig} />
       </Flex>
     </DndProvider>
   );

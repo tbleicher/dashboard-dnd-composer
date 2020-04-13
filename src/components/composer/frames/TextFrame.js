@@ -5,7 +5,7 @@ const TextFrame = (props) => {
   return <Frame {...props} />;
 };
 TextFrame.defaultProps = {
-  icon: "text",
+  icon: "textbox",
 };
 
 export default TextFrame;

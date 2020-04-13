@@ -35,7 +35,6 @@ const Sidebar = (props) => {
       <MenuItem active={true}>Dashboard</MenuItem>
       <MenuItem>About</MenuItem>
       <MenuItem fontWeight="bold">Todo:</MenuItem>
-      <SubMenuItem>add frame types</SubMenuItem>
       <SubMenuItem>add spacers</SubMenuItem>
       <SubMenuItem>add size limitations to drop targets</SubMenuItem>
       <SubMenuItem>encapsulate frame rendering</SubMenuItem>

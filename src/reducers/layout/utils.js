@@ -66,7 +66,7 @@ export const newElement = (type, options = {}) => {
     return {
       ...element,
       children: [],
-      accept: [frameTypes.ROW, ...frameTypes.frames],
+      accept: [frameTypes.ROW, ...frameTypes.FRAMES],
     };
   }
 
@@ -74,7 +74,7 @@ export const newElement = (type, options = {}) => {
     return {
       ...element,
       children: [],
-      accept: [frameTypes.COLUMN, ...frameTypes.frames],
+      accept: [frameTypes.COLUMN, ...frameTypes.FRAMES],
     };
   }
 
