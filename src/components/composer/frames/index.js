@@ -44,18 +44,18 @@ frameTypesMap[frameTypes.TEXT] = TextFrame;
 const toolbarConfig = [
   { icon: "row", type: frameTypes.ROW },
   { icon: "column", type: frameTypes.COLUMN },
-  {
-    icon: "arrowExpandHorizontal",
-    type: frameTypes.SPACER_H,
-    width: 80,
-    height: 60,
-  },
-  {
-    icon: "arrowExpandVertical",
-    type: frameTypes.SPACER_V,
-    width: 80,
-    height: 60,
-  },
+  // {
+  //   icon: "arrowExpandHorizontal",
+  //   type: frameTypes.SPACER_H,
+  //   width: 80,
+  //   height: 60,
+  // },
+  // {
+  //   icon: "arrowExpandVertical",
+  //   type: frameTypes.SPACER_V,
+  //   width: 80,
+  //   height: 60,
+  // },
   { icon: "frame", type: frameTypes.FRAME, width: 80, height: 60 },
   { icon: "textbox", type: frameTypes.TEXT, width: 160, height: 60 },
   { icon: "chart", type: frameTypes.CHART, width: 160, height: 120 },

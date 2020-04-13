@@ -37,7 +37,6 @@ const Sidebar = (props) => {
       <MenuItem fontWeight="bold">Todo:</MenuItem>
       <SubMenuItem>add resize handles</SubMenuItem>
       <SubMenuItem>add Router</SubMenuItem>
-      <SubMenuItem>Dashboard edit state</SubMenuItem>
       <SubMenuItem>add spacers</SubMenuItem>
       <SubMenuItem>replace w/h with rows/cols</SubMenuItem>
       <SubMenuItem>layouts depending on screen size</SubMenuItem>
