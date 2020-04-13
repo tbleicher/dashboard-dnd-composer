@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { frameTypesMap, getFrameHeight } from "./frames";
-import { GRID_COLUMN_WIDTH, GRID_ROW_HEIGHT } from "./constants";
 
 const Background = styled.div`
   display: flex;
@@ -20,7 +19,7 @@ const Canvas = ({ layout, layoutOptions, width }) => {
 
   const options = {
     ...layoutOptions,
-    maxHeight: height + GRID_ROW_HEIGHT,
+    maxHeight: height + layoutOptions.gridColumnWidth,
     maxWidth: width,
   };
 
@@ -36,16 +35,6 @@ const Canvas = ({ layout, layoutOptions, width }) => {
       />
     </Background>
   );
-};
-
-Canvas.defaultProps = {
-  layoutOptions: {
-    gridRowHeight: GRID_ROW_HEIGHT,
-    gridColumnWidth: GRID_COLUMN_WIDTH,
-    targetHeight: 16,
-    targetWidth: 16,
-  },
-  width: 640,
 };
 
 export default Canvas;

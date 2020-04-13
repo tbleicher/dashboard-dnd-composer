@@ -15,17 +15,27 @@ const initialLayout = {
   type: frameTypes.COLUMN,
 };
 
-const Composer = () => {
+const Composer = (props) => {
   const [layout, dispatch] = React.useReducer(layoutReducer, initialLayout);
 
   return (
     <DndProvider backend={Backend}>
       <Flex justify="space-between" m={4}>
-        <Canvas layout={layout} />
+        <Canvas {...props} layout={layout} />
         <Toolbar dispatch={dispatch} />
       </Flex>
     </DndProvider>
   );
+};
+
+Composer.defaultProps = {
+  layoutOptions: {
+    gridColumnWidth: 80,
+    gridRowHeight: 60,
+    targetHeight: 16,
+    targetWidth: 16,
+  },
+  width: 640,
 };
 
 export default Composer;

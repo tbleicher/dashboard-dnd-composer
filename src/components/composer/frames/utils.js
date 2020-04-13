@@ -1,10 +1,4 @@
-import { GRID_COLUMN_WIDTH, GRID_ROW_HEIGHT } from "../constants";
 import { frameTypes } from ".";
-
-const defaultOptions = {
-  gridColumnWidth: GRID_COLUMN_WIDTH,
-  gridRowHeight: GRID_ROW_HEIGHT,
-};
 
 /**
  * get nominal height of a frame or sizer
@@ -16,7 +10,7 @@ const defaultOptions = {
  *
  * @param {Frame} frame - the Frame object
  */
-export const _getFrameHeight = (options = defaultOptions) => (frame) => {
+export const _getFrameHeight = (options) => (frame) => {
   const { children, type, height } = frame;
 
   if (height) return height;
@@ -38,7 +32,7 @@ export const _getFrameHeight = (options = defaultOptions) => (frame) => {
 
   return options.gridRowHeight;
 };
-export const getFrameHeight = (options = defaultOptions) => (frame) => {
+export const getFrameHeight = (options) => (frame) => {
   const height = _getFrameHeight(options)(frame);
 
   if (options.shouldLog && options.shouldLog(frame)) {
@@ -51,7 +45,7 @@ export const getFrameHeight = (options = defaultOptions) => (frame) => {
   return height;
 };
 
-export const _getFrameWidth = (options = defaultOptions) => (frame) => {
+export const _getFrameWidth = (options) => (frame) => {
   const { children, type, width } = frame;
 
   if (width) return width;
@@ -69,7 +63,7 @@ export const _getFrameWidth = (options = defaultOptions) => (frame) => {
   return options.gridColumnWidth;
 };
 
-export const getFrameWidth = (options = defaultOptions) => (frame) => {
+export const getFrameWidth = (options) => (frame) => {
   const width = _getFrameWidth(options)(frame);
 
   if (options.shouldLog && options.shouldLog(frame)) {
