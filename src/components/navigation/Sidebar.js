@@ -38,6 +38,7 @@ const Sidebar = (props) => {
       <SubMenuItem>add frame types</SubMenuItem>
       <SubMenuItem>add spacers</SubMenuItem>
       <SubMenuItem>add size limitations to drop targets</SubMenuItem>
+      <SubMenuItem>encapsulate frame rendering</SubMenuItem>
       <SubMenuItem>add resize handles</SubMenuItem>
       <SubMenuItem>add Router</SubMenuItem>
       <SubMenuItem>Dashboard edit state</SubMenuItem>

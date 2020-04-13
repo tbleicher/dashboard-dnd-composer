@@ -83,8 +83,12 @@ const ColumnSizer = (props) => {
 };
 
 ColumnSizer.propTypes = {
+  // icon: PropTypes.string,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
+};
+ColumnSizer.defaultProps = {
+  // icon: "column",
 };
 
 export default ColumnSizer;

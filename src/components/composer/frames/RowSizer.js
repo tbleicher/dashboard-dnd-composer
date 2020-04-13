@@ -106,8 +106,12 @@ const RowSizer = (props) => {
 };
 
 RowSizer.propTypes = {
+  // icon: PropTypes.string,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
+};
+RowSizer.defaultProps = {
+  // icon: "row",
 };
 
 export default RowSizer;

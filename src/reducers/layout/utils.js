@@ -66,7 +66,7 @@ export const newElement = (type, options = {}) => {
     return {
       ...element,
       children: [],
-      accept: [frameTypes.ROW, frameTypes.FRAME],
+      accept: [frameTypes.ROW, ...frameTypes.frames],
     };
   }
 
@@ -74,7 +74,7 @@ export const newElement = (type, options = {}) => {
     return {
       ...element,
       children: [],
-      accept: [frameTypes.COLUMN, frameTypes.FRAME],
+      accept: [frameTypes.COLUMN, ...frameTypes.frames],
     };
   }
 
@@ -100,7 +100,7 @@ export const withLogging = (reducer) => (state, action) => {
   const newState = reducer(state, action);
 
   console.log(JSON.stringify(action, null, 2));
-  console.log(frameToString()(newState));
+  //console.log(frameToString()(newState));
 
   return newState;
 };

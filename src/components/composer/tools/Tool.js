@@ -29,6 +29,7 @@ const Tool = (props) => {
         dispatch(
           addFrame({
             frameType: type,
+            icon,
             ...dropResult,
             ...frameProps,
           })
