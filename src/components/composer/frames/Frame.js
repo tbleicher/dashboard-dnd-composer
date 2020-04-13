@@ -18,6 +18,9 @@ const Frame = (props) => {
   const { width, height, layoutOptions } = props;
   const { targetHeight, targetWidth } = layoutOptions;
 
+  // TODO: replace width/height with cols/rows and calculate
+  //       screensize from gridColumnWidth/gridRowHeight
+
   return (
     <Flex
       bg="brand.100"

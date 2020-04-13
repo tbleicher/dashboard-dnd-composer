@@ -1,28 +1,28 @@
 import React from "react";
 import { Stack } from "@chakra-ui/core";
 import Tool from "./Tool";
-import types from "./toolTypes";
+import { frameTypes } from "../frames";
 
 const tools = [
-  { icon: "row", type: types.ADD_ROW },
-  { icon: "column", type: types.ADD_COLUMN },
+  { icon: "row", type: frameTypes.ROW },
+  { icon: "column", type: frameTypes.COLUMN },
   {
     icon: "arrowExpandHorizontal",
-    type: types.ADD_SPACER_H,
+    type: frameTypes.SPACER_H,
     width: 80,
     height: 60,
   },
   {
     icon: "arrowExpandVertical",
-    type: types.ADD_SPACER_V,
+    type: frameTypes.SPACER_V,
     width: 80,
     height: 60,
   },
-  { icon: "frame", type: types.ADD_FRAME, width: 240, height: 120 },
-  { icon: "textbox", type: types.ADD_TEXT, width: 80, height: 60 },
-  { icon: "chart", type: types.ADD_CHART, width: 80, height: 60 },
-  { icon: "table", type: types.ADD_TABLE, width: 80, height: 60 },
-  { icon: "image", type: types.ADD_IMAGE, width: 80, height: 60 },
+  { icon: "frame", type: frameTypes.FRAME, width: 240, height: 120 },
+  { icon: "textbox", type: frameTypes.TEXT, width: 80, height: 60 },
+  { icon: "chart", type: frameTypes.CHART, width: 80, height: 60 },
+  { icon: "table", type: frameTypes.TABLE, width: 80, height: 60 },
+  { icon: "image", type: frameTypes.IMAGE, width: 80, height: 60 },
 ];
 
 const Toolbar = (props) => {

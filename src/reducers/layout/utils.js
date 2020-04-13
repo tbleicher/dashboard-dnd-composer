@@ -1,15 +1,25 @@
 import shortid from "shortid";
-import { frameTypesByActionType, frameTypes } from "components/composer/frames";
-import { toolTypes } from "components/composer/tools";
+import { frameTypes } from "components/composer/frames";
 
-export const addElement = (type) => (state, action) => {
-  const { dropEffect, index, parent, ...frameOptions } = action.payload;
+export const addElement = (state, action) => {
+  const {
+    dropEffect,
+    frameType,
+    index,
+    parent,
+    ...frameOptions
+  } = action.payload;
+
+  if (!frameType) {
+    console.warn(`no frame type for action '${action.type}'`);
+    return state;
+  }
 
   // the current collection is the drop target -> add new element to children
   if (state.id === parent) {
     const children = [
       ...state.children.slice(0, index),
-      newElement(type, frameOptions),
+      newElement(frameType, frameOptions),
       ...state.children.slice(index),
     ];
 
@@ -18,16 +28,10 @@ export const addElement = (type) => (state, action) => {
 
   // the current collection contains the drop target -> descend down children
   if (state.children && includesParent(state.children, parent)) {
-    const frameType = frameTypesByActionType[action.type];
-    if (!frameType) {
-      console.warn(`no frame type for action '${action.type}'`);
-      return state;
-    }
-
     return {
       ...state,
       children: state.children
-        ? state.children.map((child) => addElement(frameType)(child, action))
+        ? state.children.map((child) => addElement(child, action))
         : undefined,
     };
   }
@@ -62,7 +66,7 @@ export const newElement = (type, options = {}) => {
     return {
       ...element,
       children: [],
-      accept: [toolTypes.ADD_ROW, toolTypes.ADD_FRAME],
+      accept: [frameTypes.ROW, frameTypes.FRAME],
     };
   }
 
@@ -70,7 +74,7 @@ export const newElement = (type, options = {}) => {
     return {
       ...element,
       children: [],
-      accept: [toolTypes.ADD_COLUMN, toolTypes.ADD_FRAME],
+      accept: [frameTypes.COLUMN, frameTypes.FRAME],
     };
   }
 

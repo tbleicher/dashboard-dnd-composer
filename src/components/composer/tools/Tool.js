@@ -1,34 +1,13 @@
 import React from "react";
 import { Box, Icon } from "@chakra-ui/core";
 import { useDrag } from "react-dnd";
-
-// TODO: The only DnD action for this tool is adding frames
-//       define frame type in payload (from prop?) and use
-//       sigle 'ADD_FRAME' action in reducer
-
-/**
- * create a reducer action of shape { type, payload } from
- * DnD item and dropResult
- *
- * @param {*} item: DnD dropped item object
- * @param {*} dropResult: DnD drop result object
- */
-const actionFromDrop = (item, dropResult, frameProps) => {
-  return {
-    type: item.type,
-    payload: {
-      ...dropResult,
-      ...frameProps,
-    },
-  };
-};
+import { addFrame } from "reducers/layout";
 
 /**
  * represents a DnD action in the dashboard
  *
- * The action DnD type is used as the the state reducer action type
- * so that a DnD type of 'ADD_FRAME' will dispatch an 'ADD_FRAME'
- * action type on drop.
+ * The frame type defines that DnD 'item' type so that the correct
+ * drop targets can be highlighted
  *
  * props:
  *
@@ -39,15 +18,21 @@ const actionFromDrop = (item, dropResult, frameProps) => {
  * @param {*} props
  */
 const Tool = (props) => {
-  // mb is injected by Stack wrapper
+  // mb is injected by the Stack wrapper
   const { dispatch, icon, mb, type, ...frameProps } = props;
 
   const [{ isDragging }, drag] = useDrag({
-    item: { type }, // tool type identifies reducer action
+    item: { type },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        dispatch(actionFromDrop(item, dropResult, frameProps));
+        dispatch(
+          addFrame({
+            frameType: type,
+            ...dropResult,
+            ...frameProps,
+          })
+        );
       }
     },
     collect: (monitor) => ({

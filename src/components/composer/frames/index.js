@@ -15,18 +15,6 @@ const frameTypes = {
   TEXT: "TEXT",
 };
 
-const frameTypesByActionType = {
-  ADD_CHART: "CHART",
-  ADD_COLUMN: "COLUMN",
-  ADD_FRAME: "FRAME",
-  ADD_IMAGE: "IMAGE",
-  ADD_ROW: "ROW",
-  ADD_SPACER_H: "SPACER_H",
-  ADD_SPACER_V: "SPACER_V",
-  ADD_TABLE: "TABLE",
-  ADD_TEXT: "TEXT",
-};
-
 const frameTypesMap = Object.keys(frameTypes).reduce((mapping, key) => {
   mapping[key] = Frame;
   return mapping;
@@ -38,7 +26,6 @@ export {
   ColumnSizer,
   Frame,
   RowSizer,
-  frameTypesByActionType,
   frameTypes,
   frameTypesMap,
   getFrameHeight,

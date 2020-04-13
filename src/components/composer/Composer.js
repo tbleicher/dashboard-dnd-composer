@@ -6,11 +6,11 @@ import { Flex } from "@chakra-ui/core";
 import Canvas from "./Canvas";
 import { frameTypes } from "./frames";
 import layoutReducer, { demoLayout } from "reducers/layout";
-import { Toolbar, toolTypes } from "./tools";
+import { Toolbar } from "./tools";
 
 const initialLayout = {
   id: "DASHBOARD-LAYOUT-ID",
-  accept: [toolTypes.ADD_ROW],
+  accept: [frameTypes.ROW],
   children: demoLayout(640),
   type: frameTypes.COLUMN,
 };

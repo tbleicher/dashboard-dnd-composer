@@ -1,21 +1,37 @@
-import { frameTypes } from "components/composer/frames";
+import * as actionTypes from "./actions";
 import { addElement, withLogging } from "./utils";
+import { validateAddFramePayload } from "./validate";
 
-const addColumn = addElement(frameTypes.COLUMN);
-const addRow = addElement(frameTypes.ROW);
-const addFrame = addElement(frameTypes.FRAME);
+const validatePayload = ({ type, payload }) => {
+  if (type === actionTypes.ADD_FRAME) {
+    return validateAddFramePayload(payload);
+  }
+
+  return true;
+};
+
+const validateAction = (action) => {
+  if (!validatePayload(action)) {
+    const json = JSON.stringify(action.payload, null, 2);
+    console.error(`invalid payload for ${action.type}:\n${json}`);
+
+    return false;
+  }
+
+  return true;
+};
 
 // action types are shared between the reducer and
 // drag-and-drop item/target types
 const layoutReducer = (state, action) => {
+  if (!validateAction(action)) {
+    return state;
+  }
+
   // console.clear();
   switch (action.type) {
-    case "ADD_COLUMN":
-      return withLogging(addColumn)(state, action);
     case "ADD_FRAME":
-      return withLogging(addFrame)(state, action);
-    case "ADD_ROW":
-      return withLogging(addRow)(state, action);
+      return withLogging(addElement)(state, action);
     default:
       console.warn("TODO", action.type);
       return state;
