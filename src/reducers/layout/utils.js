@@ -1,6 +1,6 @@
 import shortid from "shortid";
-import { frameTypesByActionType, frameTypes } from "./frames";
-import { toolTypes } from "./tools";
+import { frameTypesByActionType, frameTypes } from "components/composer/frames";
+import { toolTypes } from "components/composer/tools";
 import { GRID_ROW_HEIGHT, GRID_COLUMN_WIDTH } from "./constants";
 
 export const addElement = (type) => (state, action) => {

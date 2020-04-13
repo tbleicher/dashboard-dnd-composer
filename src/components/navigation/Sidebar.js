@@ -37,6 +37,7 @@ const Sidebar = (props) => {
       <MenuItem fontWeight="bold">Todo:</MenuItem>
       <SubMenuItem>clean up 'ADD_FRAME' action</SubMenuItem>
       <SubMenuItem>add frame types</SubMenuItem>
+      <SubMenuItem>add size limitations to drop targets</SubMenuItem>
       <SubMenuItem>add Router</SubMenuItem>
       <SubMenuItem>Dashboard edit state</SubMenuItem>
       <SubMenuItem>layouts depending on screen size</SubMenuItem>

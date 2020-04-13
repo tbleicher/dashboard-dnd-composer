@@ -5,9 +5,8 @@ import { Flex } from "@chakra-ui/core";
 
 import Canvas from "./Canvas";
 import { frameTypes } from "./frames";
-import layoutReducer from "./layoutReducer";
+import layoutReducer, { demoLayout } from "reducers/layout";
 import { Toolbar, toolTypes } from "./tools";
-import demoLayout from "./demoLayout";
 
 const initialLayout = {
   id: "DASHBOARD-LAYOUT-ID",

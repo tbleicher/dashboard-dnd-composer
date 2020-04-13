@@ -1,5 +1,5 @@
-import { frameTypes } from "./frames";
-import { addElement, withLogging } from "./reducerUtils";
+import { frameTypes } from "components/composer/frames";
+import { addElement, withLogging } from "./utils";
 
 const addColumn = addElement(frameTypes.COLUMN);
 const addRow = addElement(frameTypes.ROW);
