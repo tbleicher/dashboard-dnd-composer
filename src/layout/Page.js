@@ -17,10 +17,7 @@ const Page = ({ children, title }) => {
         <Sidebar />
 
         {/* TODO: overflow-y settings */}
-        <main style={{ flexGrow: 1, overflow: "auto" }}>
-          <PageTitle action={{ icon: "edit" }} title="Dashboard" />
-          <Box id="bodyColumnContainer">{children}</Box>
-        </main>
+        <main style={{ flexGrow: 1, overflow: "auto" }}>{children}</main>
       </ContainerRow>
       <Footer />
     </Stack>
