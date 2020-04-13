@@ -14,6 +14,10 @@ const getInnerHeight = (props) => {
 const getTargetSize = (props) => (frame, index) => {
   const { targetHeight } = props.layoutOptions;
 
+  if (props.level === -1) {
+    return { height: targetHeight * 2 };
+  }
+
   return {
     height: index === 0 ? targetHeight / 2 : targetHeight,
     marginTop: index === 0 ? targetHeight / -2 : 0,

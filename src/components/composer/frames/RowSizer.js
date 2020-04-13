@@ -57,6 +57,15 @@ const getFinalTargetSize = (props) => (frames) => {
   const height = Math.max(...frames.map(getFrameHeight(layoutOptions)));
   const width = maxWidth - getInnerWidth(frames, layoutOptions);
 
+  // row inside a column but with space left in top-level row
+  if (width === 0 && canExpand(props)) {
+    return {
+      height: height - targetHeight,
+      width: targetWidth,
+      marginLeft: -targetWidth,
+    };
+  }
+
   return {
     disabled: !canExpand(props),
     height: height - targetHeight,

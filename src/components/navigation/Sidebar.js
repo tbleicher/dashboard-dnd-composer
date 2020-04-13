@@ -33,10 +33,10 @@ const Sidebar = (props) => {
       {...props}
     >
       <MenuItem active={true}>Dashboard</MenuItem>
-      <MenuItem>About</MenuItem>
       <MenuItem fontWeight="bold">Todo:</MenuItem>
       <SubMenuItem>add resize handles</SubMenuItem>
-      <SubMenuItem>add Router</SubMenuItem>
+      <SubMenuItem>delete frame</SubMenuItem>
+      <SubMenuItem>wrap frame in column/row</SubMenuItem>
       <SubMenuItem>add spacers</SubMenuItem>
       <SubMenuItem>replace w/h with rows/cols</SubMenuItem>
       <SubMenuItem>layouts depending on screen size</SubMenuItem>

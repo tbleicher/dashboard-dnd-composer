@@ -22,8 +22,6 @@ const headerLeft = newElement(frameTypes.TEXT, {
 });
 header.children = [headerLeft];
 
-const empty = newElement(frameTypes.ROW, { id: "empty" });
-
 // col1 - square on top wide below
 const col1frm1 = newElement(frameTypes.CHART, { id: "col1frm1", ...w2h2 });
 const col1frm2 = newElement(randomFrameType(), { id: "col1frm2", ...w2h1 });
@@ -94,7 +92,7 @@ const fullRow = (maxWidth) => {
 };
 
 const demoLayout = (maxWidth) => {
-  return [header, empty, fullRow(maxWidth), mixed];
+  return [header, fullRow(maxWidth), mixed];
 };
 
 export default demoLayout;
