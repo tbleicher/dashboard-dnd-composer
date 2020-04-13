@@ -1,20 +1,12 @@
 import React from "react";
-import { Box, Stack, Text } from "@chakra-ui/core";
+import { Box, Stack } from "@chakra-ui/core";
 
 import { Breadcrumbs, Sidebar } from "components";
 import ContainerRow from "./ContainerRow";
 import Footer from "./Footer";
 import Header from "./Header";
+import PageTitle from "./PageTitle";
 
-const Title = ({ title }) => {
-  return (
-    <Box borderBottom="1px" borderColor="brand.700" p={4}>
-      <Text color="brand.700" as="h2" m={0}>
-        {title}
-      </Text>
-    </Box>
-  );
-};
 const Page = ({ children, title }) => {
   return (
     <Stack style={{ height: "100vh" }}>
@@ -26,7 +18,7 @@ const Page = ({ children, title }) => {
 
         {/* TODO: overflow-y settings */}
         <main style={{ flexGrow: 1, overflow: "auto" }}>
-          <Title title="Dashboard" />
+          <PageTitle action={{ icon: "edit" }} title="Dashboard" />
           <Box id="bodyColumnContainer">{children}</Box>
         </main>
       </ContainerRow>

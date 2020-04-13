@@ -62,7 +62,6 @@ const Sizer = (props) => {
   // TODO: drop target at the bottom to append a new frame
   nodes.push(
     <DropTarget
-      backgroundColor={children.length ? undefined : "green"}
       key="target_final"
       index={children.length}
       {...getFinalTargetSize(children)}
