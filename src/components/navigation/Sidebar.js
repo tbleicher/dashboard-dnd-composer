@@ -37,9 +37,12 @@ const Sidebar = (props) => {
       <MenuItem fontWeight="bold">Todo:</MenuItem>
       <SubMenuItem>clean up 'ADD_FRAME' action</SubMenuItem>
       <SubMenuItem>add frame types</SubMenuItem>
+      <SubMenuItem>add spacers</SubMenuItem>
       <SubMenuItem>add size limitations to drop targets</SubMenuItem>
+      <SubMenuItem>add resize handles</SubMenuItem>
       <SubMenuItem>add Router</SubMenuItem>
       <SubMenuItem>Dashboard edit state</SubMenuItem>
+      <SubMenuItem>replace w/h with rows/cols</SubMenuItem>
       <SubMenuItem>layouts depending on screen size</SubMenuItem>
       <div style={{ flexGrow: 1 }} />
       <Logo fill="white" fillOpacity={0.6} />;

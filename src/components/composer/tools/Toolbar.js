@@ -6,13 +6,23 @@ import types from "./toolTypes";
 const tools = [
   { icon: "row", type: types.ADD_ROW },
   { icon: "column", type: types.ADD_COLUMN },
-  { icon: "arrowExpandHorizontal", type: types.ADD_SPACER_H },
-  { icon: "arrowExpandVertical", type: types.ADD_SPACER_V },
-  { icon: "frame", type: types.ADD_FRAME },
-  { icon: "textbox", type: types.ADD_TEXT },
-  { icon: "chart", type: types.ADD_CHART },
-  { icon: "table", type: types.ADD_TABLE },
-  { icon: "image", type: types.ADD_IMAGE },
+  {
+    icon: "arrowExpandHorizontal",
+    type: types.ADD_SPACER_H,
+    width: 80,
+    height: 60,
+  },
+  {
+    icon: "arrowExpandVertical",
+    type: types.ADD_SPACER_V,
+    width: 80,
+    height: 60,
+  },
+  { icon: "frame", type: types.ADD_FRAME, width: 240, height: 120 },
+  { icon: "textbox", type: types.ADD_TEXT, width: 80, height: 60 },
+  { icon: "chart", type: types.ADD_CHART, width: 80, height: 60 },
+  { icon: "table", type: types.ADD_TABLE, width: 80, height: 60 },
+  { icon: "image", type: types.ADD_IMAGE, width: 80, height: 60 },
 ];
 
 const Toolbar = (props) => {

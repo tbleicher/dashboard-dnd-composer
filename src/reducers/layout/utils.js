@@ -1,15 +1,15 @@
 import shortid from "shortid";
 import { frameTypesByActionType, frameTypes } from "components/composer/frames";
 import { toolTypes } from "components/composer/tools";
-import { GRID_ROW_HEIGHT, GRID_COLUMN_WIDTH } from "./constants";
 
 export const addElement = (type) => (state, action) => {
-  const { parent, index } = action.payload;
+  const { dropEffect, index, parent, ...frameOptions } = action.payload;
+
   // the current collection is the drop target -> add new element to children
   if (state.id === parent) {
     const children = [
       ...state.children.slice(0, index),
-      newElement(type),
+      newElement(type, frameOptions),
       ...state.children.slice(index),
     ];
 
@@ -76,15 +76,13 @@ export const newElement = (type, options = {}) => {
 
   return {
     ...element,
-    width: GRID_COLUMN_WIDTH,
-    height: GRID_ROW_HEIGHT,
     ...options,
   };
 };
 
 export const frameToString = (indent = "") => (frame) => {
   if (!frame.children) {
-    return `${indent}{id: ${frame.id}, type: ${frame.type}},`;
+    return `${indent}{id: ${frame.id}, type: ${frame.type} w: ${frame.width} h: ${frame.height}},`;
   }
 
   return [

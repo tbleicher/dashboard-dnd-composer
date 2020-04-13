@@ -13,11 +13,12 @@ import { useDrag } from "react-dnd";
  * @param {*} item: DnD dropped item object
  * @param {*} dropResult: DnD drop result object
  */
-const actionFromDrop = (item, dropResult) => {
+const actionFromDrop = (item, dropResult, frameProps) => {
   return {
     type: item.type,
     payload: {
       ...dropResult,
+      ...frameProps,
     },
   };
 };
@@ -37,13 +38,16 @@ const actionFromDrop = (item, dropResult) => {
  *
  * @param {*} props
  */
-const Tool = ({ dispatch, icon, type }) => {
+const Tool = (props) => {
+  // mb is injected by Stack wrapper
+  const { dispatch, icon, mb, type, ...frameProps } = props;
+
   const [{ isDragging }, drag] = useDrag({
     item: { type }, // tool type identifies reducer action
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult();
       if (item && dropResult) {
-        dispatch(actionFromDrop(item, dropResult));
+        dispatch(actionFromDrop(item, dropResult, frameProps));
       }
     },
     collect: (monitor) => ({

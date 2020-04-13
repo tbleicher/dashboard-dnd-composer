@@ -1,6 +1,7 @@
 import { frameTypes } from "components/composer/frames";
 import { newElement } from "./utils";
 
+const w1h1 = { width: 80, height: 60 };
 const w1h2 = { width: 80, height: 120 };
 const w2h1 = { width: 160, height: 60 };
 const w2h2 = { width: 160, height: 120 };
@@ -24,8 +25,14 @@ const col1 = newElement(frameTypes.COLUMN, { id: "col1" });
 col1.children = [col1frm1, col1frm2];
 
 // nested columns
-const col2row1frm1 = newElement(frameTypes.FRAME, { id: "col2row1frm1" });
-const col2row1frm2 = newElement(frameTypes.FRAME, { id: "col2row1frm2" });
+const col2row1frm1 = newElement(frameTypes.FRAME, {
+  id: "col2row1frm1",
+  ...w1h1,
+});
+const col2row1frm2 = newElement(frameTypes.FRAME, {
+  id: "col2row1frm2",
+  ...w1h1,
+});
 const col2row1 = newElement(frameTypes.ROW, { id: "col2row1" });
 col2row1.children = [col2row1frm1, col2row1frm2];
 
@@ -35,15 +42,15 @@ const col2frm3 = newElement(frameTypes.FRAME, { id: "col2-frm3", ...w2h1 });
 const col2 = newElement(frameTypes.COLUMN, { id: "col2" });
 col2.children = [col2row1, col2frm2, col2frm3];
 
-const col3frm1 = newElement(frameTypes.FRAME, { id: "col3-frm1" });
+const col3frm1 = newElement(frameTypes.FRAME, { id: "col3-frm1", ...w1h1 });
 const col3 = newElement(frameTypes.COLUMN, { id: "col3" });
 col3.children = [col3frm1];
 
 // mixed content row
 const mixed = newElement(frameTypes.ROW, { id: "mixed" });
 
-const frame2 = newElement(frameTypes.FRAME, { id: "frame2", height: 120 });
-const frame3 = newElement(frameTypes.FRAME, { id: "frame3" });
+const frame2 = newElement(frameTypes.FRAME, { id: "frame2", ...w1h2 });
+const frame3 = newElement(frameTypes.FRAME, { id: "frame3", ...w1h1 });
 
 mixed.children = [col1, frame2, col2, frame3, col3];
 
