@@ -22,6 +22,21 @@ const getDisplayHeight = (frame, maxHeight) => {
 };
 
 /**
+ * identify if there is horizontal space left in a top-level row
+ *
+ * @param {*} props
+ */
+const canExpand = (props) => {
+  const { layoutOptions, level, canExpand, width } = props;
+  const { maxWidth } = layoutOptions;
+
+  // only evaluate at top level
+  if (level !== 0) return canExpand;
+
+  return width < maxWidth;
+};
+
+/**
  * calculate width and height for the final drop target in a RowSizer
  *
  * @param {any} props - the Frame props (includes children)
@@ -42,7 +57,11 @@ const getFinalTargetSize = (props) => (frames) => {
   const height = Math.max(...frames.map(getFrameHeight(layoutOptions)));
   const width = maxWidth - getInnerWidth(frames, layoutOptions);
 
-  return { height: height - targetHeight, width };
+  return {
+    disabled: !canExpand(props),
+    height: height - targetHeight,
+    width,
+  };
 };
 
 /**
@@ -77,6 +96,7 @@ const RowSizer = (props) => {
   const frameDimensions = {
     // height for first and intermediate drop targets
     getTargetSize: (frame, index) => ({
+      disabled: !canExpand(props),
       flexGrow: 0,
       height: height - targetHeight,
       width: targetWidth,
@@ -100,7 +120,11 @@ const RowSizer = (props) => {
       width={200}
       level={props.level}
     >
-      <Sizer {...props} frameDimensions={frameDimensions} />
+      <Sizer
+        {...props}
+        canExpand={canExpand(props)}
+        frameDimensions={frameDimensions}
+      />
     </Background>
   );
 };

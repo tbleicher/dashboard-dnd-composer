@@ -3,6 +3,7 @@ import { PropTypes } from "prop-types";
 import { Flex, Icon } from "@chakra-ui/core";
 
 const FramePropTypes = {
+  canExpand: PropTypes.bool.isRequired,
   icon: PropTypes.string,
   id: PropTypes.string.isRequired,
   height: PropTypes.number.isRequired,
@@ -19,6 +20,8 @@ const FramePropTypes = {
 const Frame = (props) => {
   const { height, icon, layoutOptions, width } = props;
   const { targetHeight, targetWidth } = layoutOptions;
+
+  // TODO: render resize handle if props.canExpand === true
 
   // TODO: replace width/height with cols/rows and calculate
   //       screensize from gridColumnWidth/gridRowHeight

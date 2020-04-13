@@ -13,6 +13,7 @@ const renderFrame = (frame, index, getFrameSize, frameProps) => {
   const Component = frameProps.framesMap[frame.type];
 
   // update layoutOptions maxWidth
+  // TODO: move to ColumnSizer?
   const layoutOptions =
     frameProps.type === "COLUMN"
       ? { ...frameProps.layoutOptions, maxWidth: frameProps.width }
@@ -76,6 +77,7 @@ Sizer.propTypes = {
   id: PropTypes.string.isRequired,
   accept: PropTypes.arrayOf(PropTypes.string).isRequired,
   children: PropTypes.array.isRequired,
+  editMode: PropTypes.bool.isRequired,
   frameDimensions: PropTypes.shape({
     getFrameSize: PropTypes.func.isRequired,
   }).isRequired,

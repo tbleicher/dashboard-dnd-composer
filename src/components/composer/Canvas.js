@@ -27,10 +27,12 @@ const Canvas = ({ layout, layoutOptions, width }) => {
     <Background id="canvas" height={options.maxHeight} width={640}>
       <Sizer
         {...layout}
-        layoutOptions={options}
-        level={-1}
+        canExpand={false}
+        editMode={true}
         framesMap={frameTypesMap}
         height={height}
+        layoutOptions={options}
+        level={-1}
         width={width}
       />
     </Background>
