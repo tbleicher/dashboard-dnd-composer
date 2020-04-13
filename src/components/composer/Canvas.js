@@ -1,11 +1,5 @@
 import React from "react";
-import styled from "styled-components";
 import { frameTypesMap, getFrameHeight } from "./frames";
-
-const Background = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
 
 const getHeight = (layout, options) => {
   const { children } = layout;
@@ -24,18 +18,16 @@ const Canvas = ({ layout, layoutOptions, width }) => {
   };
 
   return (
-    <Background id="canvas" height={options.maxHeight} width={640}>
-      <Sizer
-        {...layout}
-        canExpand={false}
-        editMode={true}
-        framesMap={frameTypesMap}
-        height={height}
-        layoutOptions={options}
-        level={-1}
-        width={width}
-      />
-    </Background>
+    <Sizer
+      {...layout}
+      canExpand={false}
+      editMode={true}
+      framesMap={frameTypesMap}
+      height={height}
+      layoutOptions={options}
+      level={-1}
+      width={width}
+    />
   );
 };
 

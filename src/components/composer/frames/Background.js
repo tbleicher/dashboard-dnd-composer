@@ -1,41 +1,57 @@
 import React from "react";
 import { useTheme } from "@chakra-ui/core";
-import styled from "styled-components";
-import { getBorderStyle } from "./utils";
+import { frameTypes } from ".";
 
-const getBackgroundPosition = (props) => {
-  return `left ${props.targetWidth / -2}px top ${props.targetHeight / -2}px`;
+export const getBorderStyle = (props, color) => {
+  const { editMode, level } = props;
+  if (!editMode || level < 0) return {};
+
+  return {
+    borderRadius: 8,
+    border: `2px solid ${color}`,
+    margin: -2,
+  };
 };
 
-const getBackgroundSize = (props) => {
-  return `${props.gridX}px ${props.gridY}px`;
+const getBackgroundPosition = ({ layoutOptions }) => {
+  const { targetHeight, targetWidth } = layoutOptions;
+
+  return `left ${targetWidth / -2}px top ${targetHeight / -2}px`;
 };
 
-const BackgroundDiv = styled.div`
-  display: flex;
+const getBackgroundSize = ({ layoutOptions }) => {
+  const gridX = layoutOptions.gridColumnWidth;
+  const gridY = layoutOptions.gridRowHeight;
 
-  background-position: ${(props) => getBackgroundPosition(props)};
-  background-size: ${(props) => getBackgroundSize(props)};
-  background-image: linear-gradient(to right, lightgrey 1px, transparent 1px),
-    linear-gradient(to bottom, lightgrey 1px, transparent 1px);
-`;
+  return `${gridX}px ${gridY}px`;
+};
+
+const getGridStyle = (props) => {
+  if (!props.editMode || props.level !== 0) return {};
+
+  return {
+    backgroundPosition: getBackgroundPosition(props),
+    backgroundSize: getBackgroundSize(props),
+    backgroundImage: `linear-gradient(to right, lightgrey 1px, transparent 1px),
+      linear-gradient(to bottom, lightgrey 1px, transparent 1px)`,
+  };
+};
 
 const Background = (props) => {
-  const { children, layoutOptions, level, style = {} } = props;
+  const { children, style = {} } = props;
   const theme = useTheme();
 
   return (
-    <BackgroundDiv
-      gridX={level === 0 ? layoutOptions.gridColumnWidth : 0}
-      gridY={level === 0 ? layoutOptions.gridRowHeight : 0}
-      {...layoutOptions}
+    <div
       style={{
-        ...style,
+        display: props.type === frameTypes.ROW ? "flex" : "block",
         ...getBorderStyle(props, theme.colors.brand[300]),
+        ...getGridStyle(props),
+        ...style,
       }}
     >
       {children}
-    </BackgroundDiv>
+    </div>
   );
 };
 
