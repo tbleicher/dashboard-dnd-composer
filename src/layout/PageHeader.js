@@ -1,7 +1,7 @@
 import React from "react";
-import { Flex, Icon, Text } from "@chakra-ui/core";
+import { Flex, Text } from "@chakra-ui/core";
 
-const PageTitle = ({ children, title }) => {
+const PageHeader = ({ children, title }) => {
   return (
     <Flex
       align="center"
@@ -9,6 +9,7 @@ const PageTitle = ({ children, title }) => {
       borderBottom="1px"
       borderColor="brand.700"
       p={4}
+      minHeight="32px"
     >
       <Text color="brand.700" as="h2" m={0}>
         {title}
@@ -18,4 +19,4 @@ const PageTitle = ({ children, title }) => {
   );
 };
 
-export default PageTitle;
+export default PageHeader;

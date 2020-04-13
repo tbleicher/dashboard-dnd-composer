@@ -77,7 +77,6 @@ Sizer.propTypes = {
   id: PropTypes.string.isRequired,
   accept: PropTypes.arrayOf(PropTypes.string).isRequired,
   children: PropTypes.array.isRequired,
-  editMode: PropTypes.bool.isRequired,
   frameDimensions: PropTypes.shape({
     getFrameSize: PropTypes.func.isRequired,
   }).isRequired,

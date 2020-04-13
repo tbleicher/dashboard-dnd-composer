@@ -1,5 +1,6 @@
 import React from "react";
 import { useTheme } from "@chakra-ui/core";
+import { LayoutContext } from "context/layout";
 import { frameTypes } from ".";
 
 export const getBorderStyle = (props, color) => {
@@ -40,13 +41,15 @@ const getGridStyle = (props) => {
 const Background = (props) => {
   const { children, style = {} } = props;
   const theme = useTheme();
+  const { state } = React.useContext(LayoutContext);
+  const _props = { ...props, editMode: state.editMode };
 
   return (
     <div
       style={{
         display: props.type === frameTypes.ROW ? "flex" : "block",
-        ...getBorderStyle(props, theme.colors.brand[300]),
-        ...getGridStyle(props),
+        ...getBorderStyle(_props, theme.colors.brand[300]),
+        ...getGridStyle(_props),
         ...style,
       }}
     >

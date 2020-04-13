@@ -2,6 +2,7 @@ import React from "react";
 import Backend from "react-dnd-html5-backend";
 import { DndProvider } from "react-dnd";
 import { Flex } from "@chakra-ui/core";
+import { LayoutContext } from "context/layout";
 
 import Canvas from "./Canvas";
 import { frameTypes, toolbarConfig } from "./frames";
@@ -17,12 +18,14 @@ const initialLayout = {
 
 const Composer = (props) => {
   const [layout, dispatch] = React.useReducer(layoutReducer, initialLayout);
+  const { state: layoutState } = React.useContext(LayoutContext);
+  const { editMode } = layoutState;
 
   return (
     <DndProvider backend={Backend}>
       <Flex justify="space-between" m={4}>
         <Canvas {...props} layout={layout} />
-        <Toolbar dispatch={dispatch} tools={toolbarConfig} />
+        {editMode && <Toolbar dispatch={dispatch} tools={toolbarConfig} />}
       </Flex>
     </DndProvider>
   );

@@ -21,7 +21,6 @@ const Canvas = ({ layout, layoutOptions, width }) => {
     <Sizer
       {...layout}
       canExpand={false}
-      editMode={true}
       framesMap={frameTypesMap}
       height={height}
       layoutOptions={options}

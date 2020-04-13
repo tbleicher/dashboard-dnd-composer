@@ -1,11 +1,10 @@
 import React from "react";
-import { Box, Stack } from "@chakra-ui/core";
+import { Stack } from "@chakra-ui/core";
 
 import { Breadcrumbs, Sidebar } from "components";
 import ContainerRow from "./ContainerRow";
 import Footer from "./Footer";
 import Header from "./Header";
-import PageTitle from "./PageTitle";
 
 const Page = ({ children, title }) => {
   return (
