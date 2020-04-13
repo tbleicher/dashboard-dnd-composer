@@ -7,7 +7,7 @@ const tools = [
   { icon: "row", type: types.ADD_ROW },
   { icon: "column", type: types.ADD_COLUMN },
   { icon: "arrowExpandHorizontal", type: types.ADD_SPACER_H },
-  // { icon: "arrowExpandVertical", type: types.ADD_SPACER_V },
+  { icon: "arrowExpandVertical", type: types.ADD_SPACER_V },
   { icon: "frame", type: types.ADD_FRAME },
   { icon: "textbox", type: types.ADD_TEXT },
   { icon: "chart", type: types.ADD_CHART },

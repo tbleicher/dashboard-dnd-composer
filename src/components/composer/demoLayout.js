@@ -1,5 +1,5 @@
 import { frameTypes } from "./frames";
-import { newElement } from "./layoutReducer";
+import { newElement } from "./reducerUtils";
 
 const w1h2 = { width: 80, height: 120 };
 const w2h1 = { width: 160, height: 60 };
