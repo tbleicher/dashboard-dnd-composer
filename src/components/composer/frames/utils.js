@@ -1,5 +1,16 @@
 import { frameTypes } from ".";
 
+export const getBorderStyle = (props, color) => {
+  const { editMode, level } = props;
+  if (!editMode || level < 0) return {};
+
+  return {
+    borderRadius: 8,
+    border: `2px solid ${color}`,
+    margin: -2,
+  };
+};
+
 /**
  * get nominal height of a frame or sizer
  *

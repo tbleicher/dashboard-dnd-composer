@@ -1,7 +1,9 @@
 import React from "react";
 import { PropTypes } from "prop-types";
+import { Box, useTheme } from "@chakra-ui/core";
+import Background from "./Background";
 import Sizer from "./Sizer";
-import { getFrameHeight, getFrameWidth } from "./utils";
+import { getBorderStyle, getFrameHeight, getFrameWidth } from "./utils";
 
 const getInnerHeight = (props) => {
   const { children, layoutOptions } = props;
@@ -53,6 +55,7 @@ const getFinalTargetSize = (props) => (frames) => {
 const ColumnSizer = (props) => {
   const { height, width, layoutOptions } = props;
   const { targetHeight, targetWidth } = layoutOptions;
+  const theme = useTheme();
 
   const frameDimensions = {
     // height for first and intermediate drop targets
@@ -66,19 +69,17 @@ const ColumnSizer = (props) => {
   };
 
   return (
-    <div
+    <Box
       data-type="ColumnSizer"
       style={{
         height: height - targetHeight,
         width: width - targetWidth,
         flexGrow: 0,
-        borderRadius: 8,
-        // border: "1px solid blue",
-        // margin: -1,
+        ...getBorderStyle(props, theme.colors.brand[300]),
       }}
     >
       <Sizer frameDimensions={frameDimensions} {...props} />
-    </div>
+    </Box>
   );
 };
 

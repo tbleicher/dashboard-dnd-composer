@@ -112,14 +112,7 @@ const RowSizer = (props) => {
   };
 
   return (
-    <Background
-      data-type="background"
-      {...layoutOptions}
-      gridColumnWidth={props.level === 0 ? layoutOptions.gridColumnWidth : 0}
-      gridRowHeight={props.level === 0 ? layoutOptions.gridRowHeight : 0}
-      width={200}
-      level={props.level}
-    >
+    <Background data-type="background" {...props}>
       <Sizer
         {...props}
         canExpand={canExpand(props)}
