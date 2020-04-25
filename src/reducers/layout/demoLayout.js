@@ -76,17 +76,25 @@ const fullRow = (maxWidth) => {
   });
   row.children = children;
 
-  const fullcol1frm1 = newElement(frameTypes.CHART, {
-    id: "fullcol1frm1",
+  // replace second frame with nested column
+  const fullRow_col1frm1 = newElement(frameTypes.CHART, {
+    id: "fullRow_col1frm1",
     ...w2h1,
   });
-  const fullcol1frm2 = newElement(frameTypes.TEXT, {
-    id: "fullcol1frm2",
-    ...w2h1,
+  const fullRow_col1row2 = newElement(frameTypes.ROW, {
+    id: "fullRow_col1row2",
   });
-  const fullcol1 = newElement(frameTypes.COLUMN, { id: "fullcol1" });
-  fullcol1.children = [fullcol1frm1, fullcol1frm2];
-  row.children[1] = fullcol1;
+  const fullRow_col1row2col1 = newElement(frameTypes.COLUMN, {
+    id: "fullRow_col1row2col1",
+  });
+  const fullRow_col1row2frm2 = newElement(frameTypes.TEXT, {
+    id: "fullRow_col1row2",
+    ...w1h1,
+  });
+  fullRow_col1row2.children = [fullRow_col1row2col1, fullRow_col1row2frm2];
+  const fullRow_col1 = newElement(frameTypes.COLUMN, { id: "fullRow_col1" });
+  fullRow_col1.children = [fullRow_col1frm1, fullRow_col1row2];
+  row.children[1] = fullRow_col1;
 
   return row;
 };

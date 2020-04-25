@@ -41,6 +41,7 @@ const Sidebar = (props) => {
       <SubMenuItem>replace w/h with rows/cols</SubMenuItem>
       <SubMenuItem>layouts depending on screen size</SubMenuItem>
       <SubMenuItem>add drag-n-drop within layout</SubMenuItem>
+      <SubMenuItem>sidebar scroll</SubMenuItem>
       <div style={{ flexGrow: 1 }} />
       <Logo fill="white" fillOpacity={0.6} />;
     </Stack>

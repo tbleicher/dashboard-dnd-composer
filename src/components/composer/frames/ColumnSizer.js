@@ -56,7 +56,7 @@ const getFinalTargetSize = (props) => (frames) => {
 };
 
 const ColumnSizer = (props) => {
-  const { height, width, layoutOptions } = props;
+  const { height, width, layoutOptions, level } = props;
   const { targetHeight, targetWidth } = layoutOptions;
 
   const frameDimensions = {
@@ -74,7 +74,7 @@ const ColumnSizer = (props) => {
     <Background
       {...props}
       style={{
-        height: height - targetHeight,
+        height: level > 1 ? height : height - targetHeight,
         width: width - targetWidth,
       }}
     >
