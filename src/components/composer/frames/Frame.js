@@ -6,33 +6,38 @@ const FramePropTypes = {
   canExpand: PropTypes.bool.isRequired,
   icon: PropTypes.string,
   id: PropTypes.string.isRequired,
-  height: PropTypes.number.isRequired,
   layoutOptions: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
-  width: PropTypes.number.isRequired,
+  rows: PropTypes.number.isRequired,
+  columns: PropTypes.number.isRequired,
 };
 
 /**
  * @typedef {Object} Frame
- * @property {number} width
- * @property {number} height
+ * @property {number} columns
+ * @property {number} rows
  */
 const Frame = (props) => {
-  const { height, icon, layoutOptions, width } = props;
-  const { targetHeight, targetWidth } = layoutOptions;
+  const { rows, columns, icon, layoutOptions } = props;
+  const {
+    gridColumnWidth,
+    gridRowHeight,
+    targetHeight,
+    targetWidth,
+  } = layoutOptions;
 
   // TODO: render resize handle if props.canExpand === true
 
-  // TODO: replace width/height with cols/rows and calculate
-  //       screensize from gridColumnWidth/gridRowHeight
+  const height = rows * gridRowHeight - targetHeight;
+  const width = columns * gridColumnWidth - targetWidth;
 
   return (
     <Flex
       bg="brand.100"
       align="center"
       justify="center"
-      width={`${width - targetWidth}px`}
-      height={`${height - targetHeight}px`}
+      width={`${width}px`}
+      height={`${height}px`}
       flexGrow={0}
       flexShrink={0}
       borderRadius="lg"

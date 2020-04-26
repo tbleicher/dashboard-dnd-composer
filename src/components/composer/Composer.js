@@ -33,12 +33,13 @@ const Composer = (props) => {
 
 Composer.defaultProps = {
   layoutOptions: {
+    availableColumns: 8,
     gridColumnWidth: 80,
     gridRowHeight: 60,
     targetHeight: 16,
     targetWidth: 16,
   },
-  width: 640,
+  columns: 8,
 };
 
 export default Composer;

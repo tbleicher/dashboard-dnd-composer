@@ -10,68 +10,39 @@ import { frameTypes } from ".";
  *
  * @param {Frame} frame - the Frame object
  */
-export const _getFrameHeight = (options) => (frame) => {
-  const { children, type, height } = frame;
+export const getFrameHeight = (frame) => {
+  const { children, rows, type } = frame;
 
-  if (height) return height;
+  if (rows) return rows;
+  // if (height) return height;
 
   // in a column, add up the height of children
   if (type === frameTypes.COLUMN && children.length) {
-    return children
-      .map(_getFrameHeight(options))
-      .reduce((sum, h) => sum + h, 0);
+    return children.map(getFrameHeight).reduce((sum, h) => sum + h, 0);
   }
 
   // in a row get the max height of all children
   if (type === frameTypes.ROW) {
-    return Math.max(
-      ...children.map(_getFrameHeight(options)),
-      options.gridRowHeight
-    );
+    return Math.max(...children.map(getFrameHeight), 1);
   }
 
-  return options.gridRowHeight;
-};
-export const getFrameHeight = (options) => (frame) => {
-  const height = _getFrameHeight(options)(frame);
-
-  if (options.shouldLog && options.shouldLog(frame)) {
-    console.group(`getFrameHeight ${frame.id}`);
-    console.log(frame);
-    console.log("  =>", height);
-    console.groupEnd();
-  }
-
-  return height;
+  return 1;
 };
 
-export const _getFrameWidth = (options) => (frame) => {
-  const { children, type, width } = frame;
+export const getFrameWidth = (frame) => {
+  const { children, columns, type } = frame;
 
-  if (width) return width;
+  if (columns) return columns;
 
   // in a column, add up the width of children
   if (type === frameTypes.COLUMN && children.length) {
-    return Math.max(...children.map(_getFrameWidth(options)));
+    return Math.max(...children.map(getFrameWidth));
   }
 
   // in a row get the max width of all children
   if (type === frameTypes.ROW) {
-    return children.map(_getFrameWidth(options)).reduce((sum, w) => sum + w, 0);
+    return children.map(getFrameWidth).reduce((sum, w) => sum + w, 0);
   }
 
-  return options.gridColumnWidth;
-};
-
-export const getFrameWidth = (options) => (frame) => {
-  const width = _getFrameWidth(options)(frame);
-
-  if (options.shouldLog && options.shouldLog(frame)) {
-    console.group(`getFrameWidth ${frame.id}`);
-    console.log(frame);
-    console.log("  =>", width);
-    console.groupEnd();
-  }
-
-  return width;
+  return 1;
 };

@@ -1,7 +1,7 @@
 import { frameTypes } from "components/composer/frames";
 
 export const validateAddFramePayload = (payload) => {
-  const { frameType, height, parent, width } = payload;
+  const { columns, frameType, parent, rows } = payload;
 
   if (!frameType || !parent) return false;
 
@@ -10,5 +10,5 @@ export const validateAddFramePayload = (payload) => {
     return true;
   }
 
-  return width && height;
+  return columns && rows;
 };

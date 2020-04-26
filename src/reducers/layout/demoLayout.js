@@ -7,18 +7,17 @@ const randomFrameType = () => {
   return FRAMES[parseInt(Math.random() * FRAMES.length)];
 };
 
-const w1h1 = { width: 80, height: 60 };
-const w1h2 = { width: 80, height: 120 };
-const w2h1 = { width: 160, height: 60 };
-const w2h2 = { width: 160, height: 120 };
+const w1h1 = { columns: 1, rows: 1 };
+const w1h2 = { columns: 1, rows: 2 };
+const w2h1 = { columns: 2, rows: 1 };
+const w2h2 = { columns: 2, rows: 2 };
 
 // header row
 // TODO: spacer
 const header = newElement(frameTypes.ROW, { id: "header" });
 const headerLeft = newElement(frameTypes.TEXT, {
   id: "headerLeft",
-  width: 160,
-  height: 60,
+  ...w2h1,
 });
 header.children = [headerLeft];
 

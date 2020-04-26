@@ -1,7 +1,16 @@
 import React from "react";
+import { PropTypes } from "prop-types";
 import { useDrop } from "react-dnd";
 
-const DropTarget = ({ accept, index, parent, ...displayProps }) => {
+const DropTarget = ({
+  accept,
+  index,
+  final,
+  getFinalTargetSize,
+  getTargetSize,
+  parent,
+  ...displayProps
+}) => {
   const [{ canDrop, isOver }, drop] = useDrop({
     accept,
     drop: () => {
@@ -12,6 +21,10 @@ const DropTarget = ({ accept, index, parent, ...displayProps }) => {
       canDrop: monitor.canDrop(),
     }),
   });
+
+  const size = final ? getFinalTargetSize(index) : getTargetSize(index);
+
+  Object.assign(displayProps, size);
 
   if (displayProps.disabled) {
     const { height, width } = displayProps;
@@ -40,7 +53,15 @@ const DropTarget = ({ accept, index, parent, ...displayProps }) => {
   return <div data-type="DropTarget" ref={drop} style={style} />;
 };
 
+DropTarget.propTypes = {
+  index: PropTypes.number.isRequired,
+  final: PropTypes.bool.isRequired,
+  getFinalTargetSize: PropTypes.func.isRequired,
+  getTargetSize: PropTypes.func.isRequired,
+};
+
 DropTarget.defaultProps = {
+  final: false,
   opacity: 0.2,
   hoverColor: "green",
   hoverOpacity: 0.5,

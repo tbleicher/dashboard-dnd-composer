@@ -100,7 +100,6 @@ export const withLogging = (reducer) => (state, action) => {
   const newState = reducer(state, action);
 
   console.log(JSON.stringify(action, null, 2));
-  //console.log(frameToString()(newState));
 
   return newState;
 };

@@ -56,11 +56,36 @@ const toolbarConfig = [
   //   width: 80,
   //   height: 60,
   // },
-  { icon: "frame", type: frameTypes.FRAME, width: 80, height: 60 },
-  { icon: "textbox", type: frameTypes.TEXT, width: 160, height: 60 },
-  { icon: "chart", type: frameTypes.CHART, width: 160, height: 120 },
-  { icon: "table", type: frameTypes.TABLE, width: 320, height: 180 },
-  { icon: "image", type: frameTypes.IMAGE, width: 160, height: 120 },
+  {
+    icon: "frame",
+    type: frameTypes.FRAME,
+    columns: 1,
+    rows: 1,
+  },
+  {
+    icon: "textbox",
+    type: frameTypes.TEXT,
+    columns: 2,
+    rows: 1,
+  },
+  {
+    icon: "chart",
+    type: frameTypes.CHART,
+    columns: 2,
+    rows: 2,
+  },
+  {
+    icon: "table",
+    type: frameTypes.TABLE,
+    columns: 3,
+    rows: 3,
+  },
+  {
+    icon: "image",
+    type: frameTypes.IMAGE,
+    columns: 2,
+    rows: 2,
+  },
 ];
 
 export {

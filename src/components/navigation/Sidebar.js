@@ -38,7 +38,6 @@ const Sidebar = (props) => {
       <SubMenuItem>delete frame</SubMenuItem>
       <SubMenuItem>wrap frame in column/row</SubMenuItem>
       <SubMenuItem>add spacers</SubMenuItem>
-      <SubMenuItem>replace w/h with rows/cols</SubMenuItem>
       <SubMenuItem>layouts depending on screen size</SubMenuItem>
       <SubMenuItem>add drag-n-drop within layout</SubMenuItem>
       <SubMenuItem>sidebar scroll</SubMenuItem>
